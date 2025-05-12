@@ -1,0 +1,29 @@
+# .NET build results
+bin/
+obj/
+
+# Avalonia specific
+.platform/
+
+# Rider / JetBrains
+.idea/
+.idea.PayApp.iml
+modules.xml
+projectSettingsUpdater.xml
+contentModel.xml
+httpRequests/
+dataSources/
+dataSources.local.xml
+
+# Visual Studio / VS Code specific
+.vscode/
+
+# Other files to ignore
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet packages
+*.nupkg
+packages/

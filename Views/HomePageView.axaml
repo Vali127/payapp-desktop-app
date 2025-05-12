@@ -1,0 +1,82 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PayApp.ViewModels"
+             x:DataType="vm:HomePageViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PayApp.Views.HomePageView">
+            <Design.DataContext> <vm:HomePageViewModel/> </Design.DataContext>
+    
+    <Grid RowDefinitions="Auto,Auto" Background="{DynamicResource PrimaryBackground}" >
+                <Grid Grid.Row="0">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+                        <StackPanel Margin="20 80 20 20" Spacing="20">
+                        
+                            <TextBlock FontFamily="{DynamicResource NunitoBold}"  FontSize="30" FontWeight="Bold" Foreground="{DynamicResource HighlightColor } " >
+                                Bienvenue sur PayApp
+                            </TextBlock>
+                        
+                            <TextBlock HorizontalAlignment="Left"  FontSize="12" Width="550" TextWrapping="Wrap" Foreground="{DynamicResource PrimaryTextColor }" >
+                                Ceci est un projet universitaire de developpement d 'application basé sur le langage CSharp, developpé avec le framework Avalonia UI. 
+                            </TextBlock>
+                        
+                            <TextBlock Padding="10 0 0 0" FontFamily="{DynamicResource NunitoBold}" FontWeight="Bold" Foreground="{DynamicResource HighlightColor }" >
+                                Les foncionnalités présente ?
+                            </TextBlock>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+                
+                
+                <Grid Grid.Row="1" RowDefinitions="Auto, Auto" Margin="20 0 0 0 " >
+                    
+                    <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 0 20" ColumnDefinitions="Auto,Auto" >
+                        <Border Grid.Column="0" Classes="infoBox" >
+                            <StackPanel>
+                                <TextBlock  Classes="infoTitle">
+                                    Les Salaires
+                                </TextBlock>
+                                <TextBlock Classes="infoDescription">
+                                    Gestion de la renumération salariale des employés
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Classes="infoBox" >
+                            <StackPanel>
+                                <TextBlock  Classes="infoTitle">
+                                    Structures organisationel
+                                </TextBlock>
+                                <TextBlock Classes="infoDescription">
+                                    Présentation de la structure de l'organisation des employés
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    
+                    <Grid Grid.Row="1"  ColumnDefinitions="Auto,Auto" >
+                        <Border Grid.Column="0" Classes="infoBox" >
+                            <StackPanel>
+                                <TextBlock  Classes="infoTitle">
+                                    Les Employés
+                                </TextBlock>
+                                <TextBlock Classes="infoDescription">
+                                    Registre et gestion des employés dans l' organisation
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Classes="infoBox" >
+                            <StackPanel>
+                                <TextBlock  Classes="infoTitle">
+                                    Données Statistiques
+                                </TextBlock>
+                                <TextBlock Classes="infoDescription">
+                                    Des données reliés aux renumérations des salariés.
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                    
+                </Grid>
+            </Grid>
+</UserControl>

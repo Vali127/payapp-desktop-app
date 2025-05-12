@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="600"
+        Width="1024" Height="600"
+        MinWidth="800" MinHeight="500"
+        FontFamily="{DynamicResource Nunito}"
+        x:Class="PayApp.Views.MainView"
+        xmlns:vm="clr-namespace:PayApp.ViewModels"
+        x:DataType="vm:MainViewModel"
+        Title="PayApp">
+        
+        <Design.DataContext><vm:MainViewModel></vm:MainViewModel></Design.DataContext>
+        
+        <Grid ColumnDefinitions="Auto, *" Background="{ DynamicResource PrimaryBackground }" >
+                <Border Padding="10" Background="{DynamicResource SecondaryBackground}" >
+                        <Grid RowDefinitions="*,Auto,Auto" >
+                                <StackPanel Grid.Row="0"  Spacing="10" >
+                                        
+                                        <Image Source="{SvgImage /Assets/Images/PayApp.svg}" Height="50" Margin="0,0,0,20" IsVisible="{Binding SideMenuExpanded}" ></Image>
+                                        <Border Height="50" IsVisible="{Binding !SideMenuExpanded}"  Margin="0,0,0,20" >
+                                                <Image Source="{SvgImage /Assets/Images/icon.svg}" Width="30"></Image>
+                                        </Border>
+                                        <Button Classes.Active="{Binding HomePageIsActive}" Command="{Binding GoToHomeCommand}"  HorizontalAlignment="Stretch"  >
+                                                <StackPanel Orientation="Horizontal" >
+                                                        <Label Classes="icon" Content="&#xE2C2;"/>
+                                                        <Label Content="Accueil" IsVisible="{Binding SideMenuExpanded}" />
+                                                </StackPanel>
+                                        </Button>
+                                        <Button Classes.Active="{Binding OrgPageIsActive}"  Command="{Binding GoToOrgPageCommand}" HorizontalAlignment="Stretch">
+                                                <StackPanel Orientation="Horizontal" >
+                                                        <Label Classes="icon" Content="&#xE0FE;"/>
+                                                        <Label Content="Organisation" IsVisible="{Binding SideMenuExpanded}"/>
+                                                </StackPanel>
+                                        </Button>
+                                        <Button Command="{Binding EmptyPageCommand}" HorizontalAlignment="Stretch" >
+                                                <StackPanel Orientation="Horizontal" >
+                                                        <Label Classes="icon" Content="&#xE68E;"/>
+                                                        <Label Content="Employés" IsVisible="{Binding SideMenuExpanded}" />
+                                                </StackPanel>
+                                        </Button>
+                                        <Button Command="{Binding EmptyPageCommand}" HorizontalAlignment="Stretch">
+                                                <StackPanel Orientation="Horizontal" >
+                                                        <Label Classes="icon" Content="&#xE68A;"/>
+                                                        <Label Content="Paiement" IsVisible="{Binding SideMenuExpanded}" />
+                                                </StackPanel>
+                                        </Button>
+                                </StackPanel>
+                                <Button Grid.Row="1" Classes="toggler" PointerPressed="InputElement_OnPointerPressed" >
+                                        <Label Content="{Binding ToggleIcon}" ></Label>
+                                </Button>
+                                <Button Command="{Binding EmptyPageCommand}" Grid.Row="2" Classes="gear" >
+                                        <Label Content="&#xE270;" ></Label> 
+                                </Button>
+                        </Grid>
+                </Border>
+                
+                <!-- Page to be loaded -->
+                <ContentControl Grid.Column="1" HorizontalAlignment="Center" Content="{Binding CurrentPage}" />
+        </Grid>
+</Window>
