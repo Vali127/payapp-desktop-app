@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using PayApp.ViewModels;
 
-namespace PayApp.PersonalLibrary;
+namespace PayApp.Data;
 
-public class MainPageLib
+public class Pages
 {
     public static Dictionary<string, ViewModelBase> GetPages()
     {

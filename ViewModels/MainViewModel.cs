@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PayApp.PersonalLibrary;
+using PayApp.Data;
 
 namespace PayApp.ViewModels;
 
@@ -19,7 +19,7 @@ public partial class MainViewModel : ViewModelBase
     private ViewModelBase _currentPage;
    
     // Allez dans MainVmLib pour introduire des nouvelles pages
-    private readonly Dictionary<string, ViewModelBase> _pages = MainPageLib.GetPages();
+    private readonly Dictionary<string, ViewModelBase> _pages = Pages.GetPages();
     
     public bool HomePageIsActive => CurrentPage == _pages["Home"];
     public bool OrgPageIsActive => CurrentPage == _pages["Org"];
