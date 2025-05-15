@@ -2,10 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PayApp.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="PayApp.Views.EmptyPageView">
-            
-            <Grid Background="{DynamicResource PrimaryBackground}" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Image Source="/Assets/Images/page_under_construction.jpg" Width="600" />
-            </Grid>
+             x:DataType="vm:EmployeePageViewModel"
+             x:Class="PayApp.Views.EmployeePageView">
+    
+    <Design.DataContext> <vm:EmployeePageViewModel/> </Design.DataContext>
+   
 </UserControl>

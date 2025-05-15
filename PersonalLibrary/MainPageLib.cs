@@ -10,7 +10,7 @@ public class MainPageLib
     {
         var pages = new Dictionary<string, ViewModelBase>
         {
-            { "Empty", new EmptyPageViewModel() },
+            { "Employee", new EmployeePageViewModel() },
             { "Home", new HomePageViewModel() },
             { "Org", new OrgPageViewModel() },
         };

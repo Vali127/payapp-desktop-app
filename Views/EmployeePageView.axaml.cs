@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace PayApp.Views;
 
-public partial class EmptyPageView : UserControl
+public partial class EmployeePageView : UserControl
 {
-    public EmptyPageView()
+    public EmployeePageView()
     {
         InitializeComponent();
     }

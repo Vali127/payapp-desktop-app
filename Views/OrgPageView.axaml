@@ -6,10 +6,10 @@
              xmlns:view="clr-namespace:PayApp.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PayApp.Views.OrgPageView">
-            <Design.DataContext> <vm:OrgPageViewModel/> </Design.DataContext>
     
-    
+    <Design.DataContext> <vm:OrgPageViewModel/> </Design.DataContext>
+
             <ContentControl>
-                <view:EmptyPageView />
+                <view:EmployeePageView />
             </ContentControl>
 </UserControl>
