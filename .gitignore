@@ -23,7 +23,7 @@ dataSources.local.xml
 *.suo
 *.userosscache
 *.sln.docstates
-
+*.env
 # NuGet packages
 *.nupkg
 packages/
