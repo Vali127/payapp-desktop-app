@@ -57,6 +57,6 @@
                 </Border>
                 
                 <!-- Page to be loaded -->
-                <ContentControl Grid.Column="1" HorizontalAlignment="Center" Content="{Binding CurrentPage}" />
+                <ContentControl Grid.Column="1" HorizontalAlignment="Stretch" Content="{Binding CurrentPage}" />
         </Grid>
 </Window>

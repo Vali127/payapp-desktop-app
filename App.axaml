@@ -19,6 +19,7 @@
         <SolidColorBrush x:Key="PrimaryBackground" Color="#323443" />
         <SolidColorBrush x:Key="SecondaryBackground" Color="#272830" />
         <SolidColorBrush x:Key="PrimaryTextColor" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="DisabledTextColor" Color="#B0B0B0" ></SolidColorBrush>
         <SolidColorBrush x:Key="SecondaryTextColor" Color="#272830" />
         <SolidColorBrush x:Key="HighlightColor" Color="#00E963" />
         <SolidColorBrush x:Key="HighlightBackgroundColor" Color="#00E963" Opacity="0.15" />

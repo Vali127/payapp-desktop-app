@@ -8,28 +8,36 @@
              x:Class="PayApp.Views.OrgPageView">
             <Design.DataContext> <vm:OrgPageViewModel/> </Design.DataContext>
     
-            <Grid ColumnDefinitions="300, *" Background="{DynamicResource PrimaryBackground}" >
-                <Grid Grid.Column="0" RowDefinitions="Auto,*" >
-                    <TextBlock Grid.Row="0" FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="20 20 0 0" Text="Departement" />
+            <Grid HorizontalAlignment="Stretch" ColumnDefinitions="Auto, *">
+                <Grid Grid.Column="0" HorizontalAlignment="Left" RowDefinitions="Auto,*" >
+                    <TextBlock Grid.Row="0" FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="30 20 0 0" Text="Departement" />
                     <ScrollViewer Grid.Row="1">
-                        <ItemsControl ItemsSource="{Binding Departments}" Padding="0 20" >
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate> 
-                                    <Border Classes="card">
-                                        <StackPanel>
-                                            <TextBlock Classes="cardTitle" Text="{Binding NomDepartement}"/>
-                                            <TextBlock Classes="cardDescription" Text="{Binding Description}" />
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                        <StackPanel>
+                            <ItemsControl ItemsSource="{Binding Departments}" Padding="30 20 30 20" >
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate> 
+                                        <Border Classes="card">
+                                            <StackPanel>
+                                                <TextBlock Classes="cardTitle" Text="{Binding NomDepartement}"/>
+                                                <TextBlock Classes="cardDescription" Text="{Binding Description}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Border Classes="cardAddMore">
+                                <StackPanel>
+                                    <TextBlock Classes="cardTitleAddMore" Text="+"/>
+                                    <TextBlock Classes="cardDescriptionAddMore" Text="Vous pouvez ajouter plus de département" />
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
                     </ScrollViewer>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <UserControl>
-                        <vm:EmptyPageViewModel></vm:EmptyPageViewModel>
-                    </UserControl>
+                    <ContentControl HorizontalAlignment="Center" >
+                        <vm:EmptyPageViewModel/>
+                    </ContentControl>
                 </Grid>
             </Grid>
 </UserControl>

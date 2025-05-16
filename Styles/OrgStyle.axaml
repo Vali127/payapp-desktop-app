@@ -5,13 +5,12 @@
         <Border Padding="20" Background="{DynamicResource PrimaryBackground }" >
             <!-- Add Controls for Previewer Here -->
             
-                            <Border Classes="card" >
-                                <StackPanel>
-                                    <TextBlock Classes="cardTitle" Text="hello"/>
-                                    <TextBlock Classes="cardDescription" Text="description description description description description description description description" />
-                                </StackPanel>
-                            </Border>
-            
+            <Border Classes="cardAddMore">
+                <StackPanel>
+                    <TextBlock Classes="cardTitleAddMore" Text="+"/>
+                    <TextBlock Classes="cardDescriptionAddMore" Text="Vous pouvez ajouter plus de département" />
+                </StackPanel>
+            </Border>
         </Border>
     </Design.PreviewWith>
 
@@ -30,6 +29,28 @@
     <Style Selector="TextBlock.cardDescription">
         <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="Margin" Value="10 5 10 10" ></Setter>
+        <Setter Property="TextWrapping" Value="Wrap" ></Setter>
+    </Style>
+    
+    <Style Selector="Border.cardAddMore" >
+        <Setter Property="Background" Value="{DynamicResource PrimaryBackground}" />
+        <Setter Property="Width" Value="260" />
+        <Setter Property="CornerRadius" Value="5" ></Setter>
+        <Setter Property="Margin" Value="0 0 0 10" ></Setter>
+    </Style>
+    <Style Selector="TextBlock.cardTitleAddMore">
+        <Setter Property="FontFamily" Value="{DynamicResource NunitoBold}" ></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource DisabledTextColor}" />
+        <Setter Property="FontWeight" Value="Bold"></Setter>
+        <Setter Property="FontSize" Value="50" />
+        <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
+        <Setter Property="Margin" Value="10 0 10 0" ></Setter>
+    </Style>
+    <Style Selector="TextBlock.cardDescriptionAddMore">
+        <Setter Property="Foreground" Value="{DynamicResource DisabledTextColor}" />
+        <Setter Property="Margin" Value="10 5 10 10" ></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
+        <Setter Property="TextAlignment" Value="Center"></Setter>
         <Setter Property="TextWrapping" Value="Wrap" ></Setter>
     </Style>
     
