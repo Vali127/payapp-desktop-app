@@ -8,6 +8,7 @@ obj/
 # Rider / JetBrains
 .idea/
 .idea.PayApp.iml
+.env
 modules.xml
 projectSettingsUpdater.xml
 contentModel.xml

@@ -51,7 +51,7 @@
                                         <Label Content="{Binding ToggleIcon}" ></Label>
                                 </Button>
                                 <Button Command="{Binding EmptyPageCommand}" Grid.Row="2" Classes="gear" >
-                                        <Label Content="&#xE270;" ></Label> 
+                                        <Label Classes="icon" Content="&#xE270;" ></Label> 
                                 </Button>
                         </Grid>
                 </Border>

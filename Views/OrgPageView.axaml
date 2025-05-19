@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:PayApp.ViewModels"
+             xmlns:view="clr-namespace:PayApp.Views"
              x:DataType="vm:OrgPageViewModel"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PayApp.Views.OrgPageView">
@@ -36,7 +37,7 @@
                 </Grid>
                 <Grid Grid.Column="1">
                     <ContentControl HorizontalAlignment="Center" >
-                        <vm:EmptyPageViewModel/>
+                        <view:EmptyPageView/>
                     </ContentControl>
                 </Grid>
             </Grid>

@@ -32,7 +32,7 @@
         <FontFamily x:Key="NunitoBold" >/Assets/Fonts/Bold.ttf#Boldena</FontFamily>
         <FontFamily x:Key="Nunito" >/Assets/Fonts/Nunito-VariableFont_wght.ttf#Nunito</FontFamily>
         <FontFamily x:Key="Phosphor" >/Assets/Fonts/Phosphor.ttf#Phosphor</FontFamily>
-        <FontFamily x:Key="PhosphorFill" >/Assets/Fonts/Phosphor-Fill.ttf#Phosphor#Phosphor-Fill</FontFamily>
+        <FontFamily x:Key="PhosphorFill" >/Assets/Fonts/Phosphor-Fill.ttf#Phosphor-Fill</FontFamily>
     </Application.Resources>
              
 </Application>
