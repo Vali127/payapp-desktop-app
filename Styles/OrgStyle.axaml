@@ -5,10 +5,10 @@
         <Border Padding="20" Background="{DynamicResource PrimaryBackground }" >
             <!-- Add Controls for Previewer Here -->
             
-            <Border Classes="cardAddMore">
+            <Border Classes="card">
                 <StackPanel>
-                    <TextBlock Classes="cardTitleAddMore" Text="+"/>
-                    <TextBlock Classes="cardDescriptionAddMore" Text="Vous pouvez ajouter plus de département" />
+                    <TextBlock Classes="cardTitle" Text="Title"/>
+                    <TextBlock Classes="cardDescription" Text="Some cool text to describe the crap I did, but helll, it s really cool though, yes" />
                 </StackPanel>
             </Border>
         </Border>
@@ -52,6 +52,15 @@
         <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
         <Setter Property="TextAlignment" Value="Center"></Setter>
         <Setter Property="TextWrapping" Value="Wrap" ></Setter>
+    </Style>
+    
+    <!-- dETAILS BUTTON STYLE -->
+    <Style Selector="Button.cardButton" >
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="2" ></Setter>
+        <Setter Property="FontSize" Value="12" />
     </Style>
     
 </Styles>

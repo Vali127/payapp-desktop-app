@@ -21,6 +21,12 @@
                                             <StackPanel>
                                                 <TextBlock Classes="cardTitle" Text="{Binding NomDepartement}"/>
                                                 <TextBlock Classes="cardDescription" Text="{Binding Description}" />
+                                                <Button PointerPressed="InputElement_OnPointerPressed" Tag="{Binding IdDepartement}" Classes="cardButton" >
+                                                    <StackPanel Orientation="Horizontal" >
+                                                        <Label FontFamily="{DynamicResource Phosphor}" Padding="2 5 0 0" Content="&#xE2CE;" />
+                                                        <Label Content="détails" />
+                                                    </StackPanel>
+                                                </Button>
                                             </StackPanel>
                                         </Border>
                                     </DataTemplate>

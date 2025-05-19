@@ -1,5 +1,5 @@
-using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using PayApp.ViewModels;
 
@@ -11,5 +11,12 @@ public partial class OrgPageView : UserControl
     {
         InitializeComponent();
         DataContext = new OrgPageViewModel();
+    }
+
+    private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var button = (Button)sender!;
+        var idDept = button.Tag as string;
+        
     }
 }
