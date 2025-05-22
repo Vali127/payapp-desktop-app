@@ -10,6 +10,7 @@
     </Application.DataTemplates>
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="Styles/EmployePageStyle.axaml"></StyleInclude>
         <StyleInclude Source="Styles/AppDefaultStyle.axaml"/>
         <StyleInclude Source="Styles/OrgStyle.axaml"/>
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
@@ -23,6 +24,8 @@
         <SolidColorBrush x:Key="SecondaryTextColor" Color="#272830" />
         <SolidColorBrush x:Key="HighlightColor" Color="#00E963" />
         <SolidColorBrush x:Key="HighlightBackgroundColor" Color="#00E963" Opacity="0.15" />
+        <SolidColorBrush x:Key="OrangeBackgroundColor" Color="#FE712D" Opacity="0.15" />
+
         <SolidColorBrush x:Key="ButtonBackgroundColor" Color="#000000" Opacity="0.05" />
         <SolidColorBrush x:Key="SecondaryHighlightBackgroundColor" Color="#2FAE00" Opacity="0.20" />
         <SolidColorBrush x:Key="SecondaryHighlightColor" Color="#2FAE00" />

@@ -1,0 +1,42 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+    <Style Selector="DataGrid">
+        <Setter Property="Background" Value="{DynamicResource SecondaryBackground}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="ColumnWidth" Value="50"/>
+        <Setter Property="Width" Value="800"/>
+        <Setter Property="Margin" Value="0 20 "/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+    
+    <Style Selector="DataGrid TextBlock">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="Padding" Value="8,4"/>
+    </Style>
+    <Style Selector="DataGridColumnHeader">
+        <Setter Property="Background" Value="#FF404040"/> 
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Padding" Value="10,0"/>
+    </Style>
+    <Style Selector="Button.btnCrud">
+        <Setter Property="Width" Value="100"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="Padding" Value="20 10 2 0" />
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="CornerRadius" Value="10" />    
+        <Setter Property="FontSize" Value="13"></Setter>
+    </Style>
+</Styles>

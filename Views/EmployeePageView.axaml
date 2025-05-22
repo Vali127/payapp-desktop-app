@@ -3,7 +3,61 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:view="clr-namespace:PayApp.Views"
              xmlns:vm="clr-namespace:PayApp.ViewModels"
+             x:DataType="vm:EmployeePageViewModel"
              x:Class="PayApp.Views.EmployeePageView">
-    Welcome to Avalonia!
+       <StackPanel>
+        <DataGrid ItemsSource="{Binding Employees}" HorizontalAlignment="Left" IsReadOnly="True" AutoGenerateColumns="False">
+              <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Nom">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NomEmploye}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Prenom">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding PrenomEmploye}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Sexe">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Sexe}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Naissance">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DateNaissance}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Email">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Email}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Telephone">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NumTelephone}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+           <StackPanel Orientation="Horizontal" Spacing="10">
+               <Button Click="AddEmployeePopup_Click" Classes="btnCrud" Background="{DynamicResource HighlightBackgroundColor}" Content="Ajouter"/>
+               <Button Click="ModifyEmployeePopup_Click"  Classes="btnCrud" Content="Modifier"/>
+               <Button Click="DeleteEmployeePopup_Click" Classes="btnCrud" Content="Supprimer" Background="{DynamicResource OrangeBackgroundColor}"/>
+           </StackPanel>
+    </StackPanel>
 </UserControl>
