@@ -94,5 +94,33 @@ public class OrgDataModel
 
         return result;
     }
+
+    public static string PayAPost(string postId)
+    {
+        var dbconnectionsetting = Environment.GetEnvironmentVariable("DB_CONNECTION_SETTING"); 
+        var connection = new MySqlConnection(dbconnectionsetting);
+        connection.Open();
+
+        var sql = "INSERT INTO PAIEMENT (id_employe, etat) SELECT E.id_employe, 'payé' FROM EMPLOYE E WHERE E.id_poste = '"+postId+"'";
+        
+        using var cmd = new MySqlCommand(sql, connection);
+        try
+        {
+            cmd.ExecuteNonQuery();
+            return "Paiement éffectué avec succes !!";
+        }
+        catch ( MySqlException error )
+        {
+            if ( error.Number == 1062 )  // j arrivais pas a identifier le genre d' exception donc je pars du code ' erreur pour poser des conditions
+            {
+                return "Paiement des employés non payé du poste !! \n à Notifier : pas de dédoublement pour les employés déja payé ce mois-ci ";
+            }
+            else
+            {
+                Console.WriteLine(error.Message, error.Number);
+                return error.Message;
+            }
+        }
+    }
     
 }

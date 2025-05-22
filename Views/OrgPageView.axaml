@@ -89,6 +89,7 @@
                                                             <Label FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" CornerRadius="8" Padding="8 5" Margin="10 0 10 10" Content="{Binding NumberOfEmployees, StringFormat='{}{0} employé(s) '}" Foreground="{DynamicResource HighlightColor}" Background="{DynamicResource HighlightBackgroundColor}" />
                                                             <Label FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" CornerRadius="8" Padding="8 5" Margin="10 0 10 10" Content="{Binding Salary, StringFormat='{}{0} ar '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
                                                         </StackPanel>
+                                                        <Button PointerPressed="InputElementPay_OnPointerPressed" Tag="{Binding IdPoste}" Content="Payer?" FontFamily="{DynamicResource NunitoBold}" FontSize="11" Background="{DynamicResource HighlightColor}" Foreground="{DynamicResource SecondaryBackground}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="20 0 20 20"/>
                                                     </StackPanel>
                                                 </Border>
                                             </DataTemplate>

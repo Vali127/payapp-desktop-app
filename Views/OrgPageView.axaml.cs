@@ -1,4 +1,3 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Input;
 using PayApp.ViewModels;
@@ -18,5 +17,12 @@ public partial class OrgPageView : UserControl
         var btn = (Button)sender!;
         var id = btn.Tag as string;
         ( DataContext as OrgPageViewModel )?.GetDepartementDetailsCommand.Execute(id);
+    }
+
+    private void InputElementPay_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var btn = (Button)sender!;
+        var id = btn.Tag as string;
+        (DataContext as OrgPageViewModel)?.PayFromPostCommand.Execute(id);
     }
 }
