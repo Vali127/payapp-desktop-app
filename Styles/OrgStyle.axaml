@@ -4,13 +4,6 @@
     <Design.PreviewWith>
         <Border Padding="20" Background="{DynamicResource PrimaryBackground }" >
             <!-- Add Controls for Previewer Here -->
-            
-            <Border Classes="card">
-                <StackPanel>
-                    <TextBlock Classes="cardTitle" Text="Title"/>
-                    <TextBlock Classes="cardDescription" Text="Some cool text to describe the crap I did, but helll, it s really cool though, yes" />
-                </StackPanel>
-            </Border>
         </Border>
     </Design.PreviewWith>
 
@@ -30,6 +23,7 @@
         <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="Margin" Value="10 5 10 10" ></Setter>
         <Setter Property="TextWrapping" Value="Wrap" ></Setter>
+        <Setter Property="TextAlignment" Value="Left" />
     </Style>
     
     <Style Selector="Border.cardAddMore" >
@@ -61,6 +55,31 @@
         <Setter Property="Margin" Value="10" />
         <Setter Property="Padding" Value="2" ></Setter>
         <Setter Property="FontSize" Value="12" />
+    </Style>
+    
+    <!-- scrobar -->
+    <Style Selector="ScrollBar Thumb">
+        <Setter Property="Background" Value="{DynamicResource HighlightBackgroundColor}"/>
+        <Setter Property="Width" Value="10"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+    <Style Selector="ScrollBar Thumb:pointerover">
+        <Setter Property="Background" Value="{DynamicResource HighlightColor}"/>
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+    <Style Selector="ScrollBar Thumb:pressed">
+        <Setter Property="Background" Value="{DynamicResource HighlightColor}"/>
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+    
+    <Style Selector="Border.Description" >
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="30 0" />
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="CornerRadius" Value="5" ></Setter>
+        <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
     </Style>
     
 </Styles>

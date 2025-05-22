@@ -3,8 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:PayApp.ViewModels"
-             xmlns:view="clr-namespace:PayApp.Views"
+             xmlns:component="clr-namespace:PayApp.Views.OrgPageComponents"
              x:DataType="vm:OrgPageViewModel"
+             x:Name="Root"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PayApp.Views.OrgPageView">
             <Design.DataContext> <vm:OrgPageViewModel/> </Design.DataContext>
@@ -21,7 +22,7 @@
                                             <StackPanel>
                                                 <TextBlock Classes="cardTitle" Text="{Binding NomDepartement}"/>
                                                 <TextBlock Classes="cardDescription" Text="{Binding Description}" />
-                                                <Button PointerPressed="InputElement_OnPointerPressed" Tag="{Binding IdDepartement}" Classes="cardButton" >
+                                                <Button PointerPressed="InputElement_OnPointerPressed" Tag="{Binding IdDepartement}" Classes="cardButton">
                                                     <StackPanel Orientation="Horizontal" >
                                                         <Label FontFamily="{DynamicResource Phosphor}" Padding="2 5 0 0" Content="&#xE2CE;" />
                                                         <Label Content="détails" />
@@ -42,9 +43,35 @@
                     </ScrollViewer>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <ContentControl HorizontalAlignment="Center" >
-                        <view:EmptyPageView/>
+                    <ContentControl HorizontalAlignment="Center" IsVisible="{Binding !DetailsIsShown}" >
+                        <component:NoSelectedDepartment/>
                     </ContentControl>
+                    
+                    
+                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="Auto, *" >
+                        <ItemsControl ItemsSource="{Binding DepartmentDetails}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid RowDefinitions="Auto,Auto,*" Margin="10 60" >
+                                        <Border Grid.Row="0" Classes="Description" Width="500" >
+                                            <StackPanel Spacing="15" >
+                                                <TextBlock Text="{Binding DepartmentName}" Classes="cardTitle" FontSize="20" />
+                                                <TextBlock Text="{Binding Description}" Classes="cardDescription" />
+                                                <StackPanel Orientation="Horizontal" Spacing="20">
+                                                    <Label Padding="20 0 0 0 " Foreground="{DynamicResource PrimaryTextColor}" FontFamily="{DynamicResource NunitoBold}" Content="Nombre de Poste" />
+                                                    <Label Padding="5"  Background="{DynamicResource HighlightColor}" CornerRadius="100" Foreground="{DynamicResource SecondaryBackground}" FontFamily="{DynamicResource NunitoBold}"  Content="{Binding NumberOfPost}" />
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" Spacing="20">
+                                                    <Label  Padding="20 0 0 0 " Foreground="{DynamicResource PrimaryTextColor}" FontFamily="{DynamicResource NunitoBold}" Content="Nombre de salariés" />
+                                                    <Label Padding="5"  Background="{DynamicResource HighlightColor}" CornerRadius="100" Foreground="{DynamicResource SecondaryBackground}" FontFamily="{DynamicResource NunitoBold}"  Content="{Binding NumberOfEmployees}" />
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>            
+                    </Grid>
                 </Grid>
             </Grid>
 </UserControl>

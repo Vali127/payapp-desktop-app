@@ -1,6 +1,6 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
 using PayApp.ViewModels;
 
 namespace PayApp.Views;
@@ -15,8 +15,8 @@ public partial class OrgPageView : UserControl
 
     private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        var button = (Button)sender!;
-        var idDept = button.Tag as string;
-        
+        var btn = (Button)sender!;
+        var id = btn.Tag as string;
+        ( DataContext as OrgPageViewModel )?.GetDepartementDetailsCommand.Execute(id);
     }
 }

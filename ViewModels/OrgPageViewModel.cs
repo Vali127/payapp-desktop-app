@@ -1,18 +1,37 @@
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PayApp.Data;
 using PayApp.DataModels;
 
 namespace PayApp.ViewModels;
 
-public class OrgPageViewModel : ViewModelBase
+public partial class OrgPageViewModel : ViewModelBase
 { 
     
-    private OrgDataModel _dataModel = new OrgDataModel();
+    private readonly OrgDataModel _dataModel = new OrgDataModel();
 
-    public ObservableCollection<Department> Departments{get;set;}
+    [ObservableProperty] public ObservableCollection<Department> _departments;
+    [ObservableProperty] private ObservableCollection<DepartmentDetails>? _departmentDetails;
+    
+    [ObservableProperty]
+    private bool _detailsIsShown ;
+
+    private void DetailsShown()
+    {
+        DetailsIsShown = true;
+    } 
     
     public OrgPageViewModel()
     {
         Departments = _dataModel.GetDepartments();
     }
+
+    [RelayCommand]
+    private void GetDepartementDetails(string id)
+    {
+        DepartmentDetails = _dataModel.GetDepartementDetails(id);
+        DetailsShown();
+    }
+    
 }
