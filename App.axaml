@@ -26,6 +26,8 @@
         <SolidColorBrush x:Key="ButtonBackgroundColor" Color="#000000" Opacity="0.05" />
         <SolidColorBrush x:Key="SecondaryHighlightBackgroundColor" Color="#2FAE00" Opacity="0.20" />
         <SolidColorBrush x:Key="SecondaryHighlightColor" Color="#2FAE00" />
+        <SolidColorBrush x:Key="OrangeHighlightColor" Color="#ffa500"/>
+        <SolidColorBrush x:Key="OrangeHighlightColorBackground" Color="#ffa500" Opacity="0.20"/>
         
         
         <!--For the font-->

@@ -48,29 +48,57 @@
                     </ContentControl>
                     
                     
-                    <Grid HorizontalAlignment="Stretch" ColumnDefinitions="Auto, *" >
-                        <ItemsControl ItemsSource="{Binding DepartmentDetails}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid RowDefinitions="Auto,Auto,*" Margin="10 60" >
-                                        <Border Grid.Row="0" Classes="Description" Width="500" >
-                                            <StackPanel Spacing="15" >
-                                                <TextBlock Text="{Binding DepartmentName}" Classes="cardTitle" FontSize="20" />
-                                                <TextBlock Text="{Binding Description}" Classes="cardDescription" />
-                                                <StackPanel Orientation="Horizontal" Spacing="20">
-                                                    <Label Padding="20 0 0 0 " Foreground="{DynamicResource PrimaryTextColor}" FontFamily="{DynamicResource NunitoBold}" Content="Nombre de Poste" />
-                                                    <Label Padding="5"  Background="{DynamicResource HighlightColor}" CornerRadius="100" Foreground="{DynamicResource SecondaryBackground}" FontFamily="{DynamicResource NunitoBold}"  Content="{Binding NumberOfPost}" />
+                    <Grid HorizontalAlignment="Stretch" RowDefinitions="Auto,Auto,*" Margin="10 0" >
+                        
+                        <Grid Grid.Row="0">
+                            <ItemsControl ItemsSource="{Binding DepartmentDetails}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="10 60 0 10" >
+                                            <Border Grid.Row="0" Classes="Description" Width="500" >
+                                                <StackPanel Spacing="15" >
+                                                    <TextBlock Text="{Binding DepartmentName}" Classes="cardTitle" FontSize="20" />
+                                                    <TextBlock Text="{Binding Description}" Classes="cardDescription" />
+                                                    <StackPanel Orientation="Horizontal" Spacing="5">
+                                                        <Label HorizontalAlignment="Left" CornerRadius="12" Padding="10 5" Margin="10 0 10 10" Content="{Binding NumberOfPost, StringFormat='{}{0} poste(s) '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
+                                                        <Label HorizontalAlignment="Left" CornerRadius="12" Padding="10 5" Margin="10 0 10 10" Content="{Binding NumberOfEmployees, StringFormat='{}{0} employé(s) '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
+                                                    </StackPanel>
                                                 </StackPanel>
-                                                <StackPanel Orientation="Horizontal" Spacing="20">
-                                                    <Label  Padding="20 0 0 0 " Foreground="{DynamicResource PrimaryTextColor}" FontFamily="{DynamicResource NunitoBold}" Content="Nombre de salariés" />
-                                                    <Label Padding="5"  Background="{DynamicResource HighlightColor}" CornerRadius="100" Foreground="{DynamicResource SecondaryBackground}" FontFamily="{DynamicResource NunitoBold}"  Content="{Binding NumberOfEmployees}" />
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </Border>
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>            
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                        
+                        <Grid Grid.Row="1" HorizontalAlignment="Center" >
+                            <TextBlock IsVisible="{Binding DetailsIsShown}" Text="Les Postes" FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="10 5 0 10" Width="500" HorizontalAlignment="Left" />
+                        </Grid>
+                        
+                        <ScrollViewer Grid.Row="2" >
+                                <Grid  RowDefinitions="Auto,Auto"  >
+                                    <ItemsControl Grid.Row="0" ItemsSource="{Binding PostOnEachDepartments}" >
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border CornerRadius="8" Margin="10 0 0 5" Background="{DynamicResource SecondaryBackground}" Width="500" >
+                                                    <StackPanel>
+                                                        <TextBlock Classes="cardTitle" Text="{Binding NomPoste}" />
+                                                        <TextBlock Classes="cardDescription" Text="{Binding DescriptionPoste}" />
+                                                        <Label FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" CornerRadius="12" Padding="8 3" Margin="10 0 10 10" Content="{Binding NumberOfEmployees, StringFormat='{}{0} employé(s) '}" Foreground="{DynamicResource HighlightColor}" Background="{DynamicResource HighlightBackgroundColor}" />
+                                                    </StackPanel>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <Border Grid.Row="1" IsVisible="{Binding DetailsIsShown}" CornerRadius="8" Margin="10 10 0 5" Background="{DynamicResource PrimaryBackground}" Width="500" >
+                                        <StackPanel>
+                                            <TextBlock Foreground="{DynamicResource DisabledTextColor}" TextAlignment="Center" FontFamily="{DynamicResource NunitoBold}" FontSize="20" Text='+' />
+                                            <TextBlock Foreground="{DynamicResource DisabledTextColor}" Classes="cardDescription" Text="vous pouvez ajouter plus de poste" TextAlignment="Center" />
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                        </ScrollViewer>
+                        
                     </Grid>
                 </Grid>
             </Grid>

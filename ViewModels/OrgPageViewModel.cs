@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -13,6 +14,7 @@ public partial class OrgPageViewModel : ViewModelBase
 
     [ObservableProperty] public ObservableCollection<Department> _departments;
     [ObservableProperty] private ObservableCollection<DepartmentDetails>? _departmentDetails;
+    [ObservableProperty] private ObservableCollection<PostOnEachDepartment>? _postOnEachDepartments;
     
     [ObservableProperty]
     private bool _detailsIsShown ;
@@ -31,6 +33,7 @@ public partial class OrgPageViewModel : ViewModelBase
     private void GetDepartementDetails(string id)
     {
         DepartmentDetails = _dataModel.GetDepartementDetails(id);
+        PostOnEachDepartments = _dataModel.GetPostByDepartment(id);
         DetailsShown();
     }
     

@@ -55,8 +55,8 @@ public class OrgDataModel
             {
                 DepartmentName = reader["nom_departement"] is DBNull ? "" : reader["nom_departement"].ToString(),
                 Description = reader["description_departement"] is DBNull ? "" : reader["description_departement"].ToString(),
-                NumberOfPost = reader["nombre_postes"] is DBNull ? 0 : Convert.ToInt32(reader["nombre_postes"]),
-                NumberOfEmployees = reader["nombre_employes"] is DBNull ? 0 : Convert.ToInt32(reader["nombre_employes"])
+                NumberOfPost = reader["nombre_postes"] is DBNull ? 0 : Convert.ToInt64(reader["nombre_postes"]),
+                NumberOfEmployees = reader["nombre_employes"] is DBNull ? 0 : Convert.ToInt64(reader["nombre_employes"])
             };
 
 
@@ -65,4 +65,32 @@ public class OrgDataModel
         
         return departmentDetail;
     }
+
+    public ObservableCollection<PostOnEachDepartment> GetPostByDepartment(string idFromDepartment)
+    {
+        var result = new ObservableCollection<PostOnEachDepartment>();
+        
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+
+        var sql = "SELECT P.id_poste,  P.nom_poste, P.description_poste, COUNT(E.id_employe) AS nb_employes FROM POSTE P LEFT JOIN EMPLOYE E ON E.id_poste = P.id_poste WHERE P.id_departement = '"+idFromDepartment+"' GROUP BY P.id_poste,P.nom_poste;";
+        
+        using var cmd = new MySqlCommand(sql, connection);
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read())
+        {
+            var column = new PostOnEachDepartment()
+            {
+                IdPoste = reader["id_poste"].ToString()!,
+                NomPoste = reader["nom_poste"].ToString()!,
+                DescriptionPoste = reader["description_poste"].ToString()!,
+                NumberOfEmployees = Convert.ToInt64(reader["nb_employes"])
+            };
+            result.Add(column);
+        }
+
+
+        return result;
+    }
+    
 }
