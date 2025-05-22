@@ -73,7 +73,7 @@ public class OrgDataModel
         var connection = new MySqlConnection(_dbconnectionsetting);
         connection.Open();
 
-        var sql = "SELECT P.id_poste,  P.nom_poste, P.description_poste, COUNT(E.id_employe) AS nb_employes FROM POSTE P LEFT JOIN EMPLOYE E ON E.id_poste = P.id_poste WHERE P.id_departement = '"+idFromDepartment+"' GROUP BY P.id_poste,P.nom_poste;";
+        var sql = "SELECT P.id_poste, P.nom_poste, P.description_poste, COUNT(E.id_employe) AS nb_employes, IFNULL(SUM(S.salaire_base), 0) AS salaire_brut_total, IFNULL(SUM(S.impot), 0) AS total_impot, IFNULL(MAX(A.total_avance), 0) AS total_avance, IFNULL(SUM(S.salaire_base - S.impot), 0) - IFNULL(MAX(A.total_avance), 0) AS salaire_net_total FROM POSTE P LEFT JOIN EMPLOYE E ON E.id_poste = P.id_poste LEFT JOIN SALAIRE S ON S.id_poste = P.id_poste LEFT JOIN (SELECT E.id_poste, SUM(A.montant_avance) AS total_avance FROM EMPLOYE E JOIN AVANCE A ON E.id_employe = A.id_employe GROUP BY E.id_poste) A ON P.id_poste = A.id_poste WHERE P.id_departement = '"+idFromDepartment+"' GROUP BY P.id_poste, P.nom_poste, P.description_poste;";
         
         using var cmd = new MySqlCommand(sql, connection);
         using var reader = cmd.ExecuteReader();
@@ -84,7 +84,8 @@ public class OrgDataModel
                 IdPoste = reader["id_poste"].ToString()!,
                 NomPoste = reader["nom_poste"].ToString()!,
                 DescriptionPoste = reader["description_poste"].ToString()!,
-                NumberOfEmployees = Convert.ToInt64(reader["nb_employes"])
+                NumberOfEmployees = Convert.ToInt64(reader["nb_employes"]),
+                Salary = Convert.ToDecimal(reader["salaire_brut_total"])
             };
             result.Add(column);
         }

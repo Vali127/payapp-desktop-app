@@ -21,4 +21,5 @@ public class PostOnEachDepartment
         public string? NomPoste { get; set; } = string.Empty;
         public string? DescriptionPoste { get; set; } = string.Empty;
         public long NumberOfEmployees { get; set; } = 0;
+        public decimal Salary{ get; set; } = 0 ;
 }
