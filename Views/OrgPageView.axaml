@@ -62,6 +62,7 @@
                                                     <StackPanel Orientation="Horizontal" Spacing="5">
                                                         <Label HorizontalAlignment="Left" CornerRadius="12" Padding="10 5" Margin="10 0 10 10" Content="{Binding NumberOfPost, StringFormat='{}{0} poste(s) '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
                                                         <Label HorizontalAlignment="Left" CornerRadius="12" Padding="10 5" Margin="10 0 10 10" Content="{Binding NumberOfEmployees, StringFormat='{}{0} employé(s) '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
+                                                        <Label HorizontalAlignment="Left" CornerRadius="12" Padding="10 5" Margin="10 0 10 10" Content="{Binding Salary, StringFormat='{}{0} ar '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
                                                     </StackPanel>
                                                 </StackPanel>
                                             </Border>

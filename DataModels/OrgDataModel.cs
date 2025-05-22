@@ -44,7 +44,7 @@ public class OrgDataModel
         using var connection = new MySqlConnection(_dbconnectionsetting);
         connection.Open();
 
-        var sql = "SELECT d.nom_departement,  d.description_departement,  COUNT(DISTINCT p.id_poste) AS nombre_postes,  COUNT(e.id_employe) AS nombre_employes FROM  DEPARTEMENT d LEFT JOIN  POSTE p ON d.id_departement = p.id_departement LEFT JOIN  EMPLOYE e ON e.id_poste = p.id_poste WHERE  d.id_departement = '"+idFromDepartment+"'  GROUP BY  d.id_departement;";
+        var sql = "SELECT d.nom_departement, d.description_departement, COUNT(DISTINCT p.id_poste) AS nombre_postes, COUNT(e.id_employe) AS nombre_employes, IFNULL(SUM(s.salaire_base - s.impot), 0) - IFNULL(SUM(a.total_avance), 0) AS montant_total_a_payer FROM DEPARTEMENT d LEFT JOIN POSTE p ON d.id_departement = p.id_departement LEFT JOIN EMPLOYE e ON e.id_poste = p.id_poste LEFT JOIN SALAIRE s ON s.id_poste = p.id_poste LEFT JOIN (SELECT e.id_poste, e.id_employe, IFNULL(SUM(a.montant_avance), 0) AS total_avance FROM EMPLOYE e LEFT JOIN AVANCE a ON e.id_employe = a.id_employe GROUP BY e.id_poste, e.id_employe) a ON a.id_poste = p.id_poste AND a.id_employe = e.id_employe WHERE d.id_departement = '"+idFromDepartment+"' GROUP BY d.id_departement;\n";
         
         using var cmd = new MySqlCommand(sql, connection);
         using var reader = cmd.ExecuteReader();
@@ -56,7 +56,8 @@ public class OrgDataModel
                 DepartmentName = reader["nom_departement"] is DBNull ? "" : reader["nom_departement"].ToString(),
                 Description = reader["description_departement"] is DBNull ? "" : reader["description_departement"].ToString(),
                 NumberOfPost = reader["nombre_postes"] is DBNull ? 0 : Convert.ToInt64(reader["nombre_postes"]),
-                NumberOfEmployees = reader["nombre_employes"] is DBNull ? 0 : Convert.ToInt64(reader["nombre_employes"])
+                NumberOfEmployees = reader["nombre_employes"] is DBNull ? 0 : Convert.ToInt64(reader["nombre_employes"]),
+                Salary = Convert.ToDecimal(reader["montant_total_a_payer"])
             };
 
 

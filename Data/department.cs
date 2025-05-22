@@ -13,6 +13,7 @@ public class DepartmentDetails
         public string? Description { get; set; } = string.Empty ;
         public long NumberOfPost { get; set; } = 0 ;
         public long NumberOfEmployees { get; set; } = 0 ;
+        public decimal Salary{ get; set; } = 0 ;
 }
 
 public class PostOnEachDepartment
