@@ -136,8 +136,8 @@ public partial class EmployeePageView : UserControl
 
     public async void DeleteEmployeePopup_Click(object? sender, RoutedEventArgs e)
     {
-        var idEmployee = new TextBox { Watermark = "ID Employe", Margin = new Thickness(0, 0, 0, 10) };
-        var enregistrerButton = new Button
+        var idBox = new TextBox { Watermark = "ID Employe", Margin = new Thickness(0, 0, 0, 10) };
+        var confirmerButton = new Button
         {
             Content = "Confirmer",
             HorizontalAlignment = HorizontalAlignment.Right,
@@ -155,68 +155,95 @@ public partial class EmployeePageView : UserControl
                 Children =
                 {
                     new TextBlock { Text = "ID Employe :" },
-                    idEmployee,
-                    enregistrerButton
+                    idBox,
+                    confirmerButton
                 }
 
             }
         };
+        confirmerButton.Click += async (_, _) =>
+        {
+            var id = idBox.Text?.Trim();
+       
+  
+            var model = new EmployeeDataModel();
+            model.DeleteEmployee(id);
+  
+            popup.Close();
+            RefreshDatagrid();
+        };
         await popup.ShowDialog((Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
             ?.MainWindow);
     }
-    public async void ModifyEmployeePopup_Click(object? sender, RoutedEventArgs e)
-    {
-        // Création des champs
-        var nomBox = new TextBox { Watermark = "Nom", Margin = new Thickness(0, 0, 0, 10) };
-        var prenomBox = new TextBox { Watermark = "Prénom", Margin = new Thickness(0, 0, 0, 10) };
-        var dateNaissanceBox = new DatePicker { Margin = new Thickness(0, 0, 0, 10) };
-        var sexeBox = new TextBox { Watermark = "Sexe", Margin = new Thickness(0, 0, 0, 10) };
-        var emailBox = new TextBox { Watermark = "Email", Margin = new Thickness(0, 0, 0, 10) };
-        var telBox = new TextBox { Watermark = "Numero tel", Margin = new Thickness(0, 0, 0, 10) };
+  public async void ModifyEmployeePopup_Click(object? sender, RoutedEventArgs e)
+  {
+      // Création des champs
+      var idBox = new TextBox{Watermark = "ID Employe", Margin = new Thickness(0, 0, 0, 10) };
+      var nomBox = new TextBox { Watermark = "Nom", Margin = new Thickness(0, 0, 0, 10) };
+      var prenomBox = new TextBox { Watermark = "Prénom", Margin = new Thickness(0, 0, 0, 10) };
+      var dateNaissanceBox = new DatePicker { Margin = new Thickness(0, 0, 0, 10) };
+      var sexeBox = new TextBox { Watermark = "Sexe", Margin = new Thickness(0, 0, 0, 10) };
+      var emailBox = new TextBox { Watermark = "Email", Margin = new Thickness(0, 0, 0, 10) };
+      var telBox = new TextBox { Watermark = "Numero tel", Margin = new Thickness(0, 0, 0, 10) };
+  
+      var enregistrerButton = new Button
+      {
+          Content = "Enregistrer les mofications",
+          HorizontalAlignment = HorizontalAlignment.Right
+      };
+  
+      var popup = new Window
+      {
+          Title = "Modifier un employé",
+          Width = 400,
+          Height = 450,
+          CanResize = false,
+          WindowStartupLocation = WindowStartupLocation.CenterOwner,
+          Content = new StackPanel
+          {
+              Margin = new Thickness(20),
+              Children =
+              {
+                  new TextBlock{Text = "Id:"},
+                  idBox,
+                  new TextBlock { Text = "Nom :" },
+                  nomBox,
+                  new TextBlock { Text = "Prénom :" },
+                  prenomBox,
+                  new TextBlock { Text = "Date de naissance :" },
+                  dateNaissanceBox,
+                  new TextBlock { Text = "Sexe:" },
+                  sexeBox,
+                  new TextBlock { Text = "Email :" },
+                  emailBox,
+                  new TextBlock { Text = "Numero :" },
+                  telBox,
+                  enregistrerButton
+              }
+          }
+      };
+  
+      enregistrerButton.Click += async (_, _) =>
+      {
+          var id = idBox.Text?.Trim();
+          var nom = nomBox.Text?.Trim();
+          var prenom = prenomBox.Text?.Trim();
+          DateTime? dateNaissance = dateNaissanceBox.SelectedDate?.DateTime;
+          var sexe = sexeBox.Text?.Trim();
+          var email = emailBox.Text?.Trim();
+          var tel = telBox.Text?.Trim();
+  
+          var model = new EmployeeDataModel();
+          model.UpdateEmployee(id, nom, prenom, sexe, dateNaissance, email, tel);
+  
+          popup.Close();
+          RefreshDatagrid();
+      };
 
-
-
-
-        var enregistrerButton = new Button
-        {
-            Content = "Enregistrer les mofications",
-            HorizontalAlignment = HorizontalAlignment.Right
-        };
-
-        var popup = new Window
-        {
-            Title = "Modifier un employé",
-            Width = 400,
-            Height = 400,
-            CanResize = false,
-            WindowStartupLocation = WindowStartupLocation.CenterOwner,
-            Content = new StackPanel
-            {
-                Margin = new Thickness(20),
-                Children =
-                {
-                    new TextBlock { Text = "Nom :" },
-                    nomBox,
-                    new TextBlock { Text = "Prénom :" },
-                    prenomBox,
-                    new TextBlock { Text = "Date de naissance :" },
-                    dateNaissanceBox,
-                    new TextBlock { Text = "Sexe:" },
-                    sexeBox,
-                    new TextBlock { Text = "Email :" },
-                    emailBox,
-                    new TextBlock { Text = "Numero :" },
-                    telBox,
-                    enregistrerButton
-                }
-            }
-        };
-
-
-        // Affiche le popup
-        await popup.ShowDialog((Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
-            ?.MainWindow);
-    }
+      // Affiche le popup
+      await popup.ShowDialog((Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
+          ?.MainWindow);
+  }
     
     
 }

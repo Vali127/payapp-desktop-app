@@ -3,14 +3,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:view="clr-namespace:PayApp.Views"
              xmlns:vm="clr-namespace:PayApp.ViewModels"
              x:DataType="vm:EmployeePageViewModel"
              x:Class="PayApp.Views.EmployeePageView">
        <StackPanel>
         <DataGrid ItemsSource="{Binding Employees}" HorizontalAlignment="Left" IsReadOnly="True" AutoGenerateColumns="False">
               <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Nom">
+                  <DataGridTemplateColumn Header="ID">
+                      <DataGridTemplateColumn.CellTemplate>
+                          <DataTemplate>
+                              <TextBlock Text="{Binding IdEmploye}"/>
+                          </DataTemplate>
+                      </DataGridTemplateColumn.CellTemplate>
+                  </DataGridTemplateColumn>
+
+                  <DataGridTemplateColumn Header="Nom">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding NomEmploye}"/>
