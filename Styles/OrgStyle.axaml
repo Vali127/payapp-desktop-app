@@ -2,8 +2,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         >
     <Design.PreviewWith>
-        <Border Padding="20" Background="{DynamicResource PrimaryBackground }" >
+        <Border Background="{DynamicResource PrimaryBackground }" >
             <!-- Add Controls for Previewer Here -->
+            
         </Border>
     </Design.PreviewWith>
 
@@ -80,6 +81,10 @@
         <Setter Property="Padding" Value="15" />
         <Setter Property="CornerRadius" Value="5" ></Setter>
         <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
+    </Style>
+    
+    <Style Selector="Button.addDepartement" >
+        
     </Style>
     
 </Styles>

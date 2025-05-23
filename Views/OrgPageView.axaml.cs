@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Input;
 using PayApp.ViewModels;
@@ -24,5 +25,20 @@ public partial class OrgPageView : UserControl
         var btn = (Button)sender!;
         var id = btn.Tag as string;
         (DataContext as OrgPageViewModel)?.PayFromPostCommand.Execute(id);
+    }
+
+    private void InputElementDelete_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var btn = (Button)sender!;
+        var id = btn.Tag as string;
+        var name = btn.Name;
+
+        var info = new Dictionary<string, object?>
+        {
+            ["id"] = id,
+            ["name"] = name
+        };
+        
+        ( DataContext as OrgPageViewModel )?.ConfirmDeletionPostCommand.Execute(info!);
     }
 }

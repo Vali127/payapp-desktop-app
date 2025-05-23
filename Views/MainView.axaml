@@ -34,7 +34,7 @@
                                                         <Label Content="Organisation" IsVisible="{Binding SideMenuExpanded}"/>
                                                 </StackPanel>
                                         </Button>
-                                        <Button Command="{Binding EmptyPageCommand}" HorizontalAlignment="Stretch" >
+                                        <Button Classes.Active="{Binding EmployeePageIsActive}" Command="{Binding GoToEmployeePageCommand}" HorizontalAlignment="Stretch" >
                                                 <StackPanel Orientation="Horizontal" >
                                                         <Label Classes="icon" Content="&#xE68E;"/>
                                                         <Label Content="Employés" IsVisible="{Binding SideMenuExpanded}" />
@@ -50,7 +50,7 @@
                                 <Button Grid.Row="1" Classes="toggler" PointerPressed="InputElement_OnPointerPressed" >
                                         <Label Content="{Binding ToggleIcon}" ></Label>
                                 </Button>
-                                <Button Command="{Binding EmptyPageCommand}" Grid.Row="2" Classes="gear" >
+                                <Button Command="{Binding GoToSettingCommand}" Grid.Row="2" Classes="gear" >
                                         <Label Classes="icon" Content="&#xE270;" ></Label> 
                                 </Button>
                         </Grid>

@@ -1,3 +1,5 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace PayApp.Data;
 
 public class Department
@@ -16,7 +18,7 @@ public class DepartmentDetails
         public decimal Salary{ get; set; } = 0 ;
 }
 
-public class PostOnEachDepartment
+public partial class PostOnEachDepartment : ObservableObject
 {
         public string? IdPoste { get; set; } = string.Empty;
         public string? NomPoste { get; set; } = string.Empty;

@@ -122,5 +122,25 @@ public class OrgDataModel
             }
         }
     }
+    //_______________________code for post___________________________________
+
+    public string DeletePost( string? idFromPost )
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+        var sql = "DELETE FROM POSTE WHERE id_poste = '"+idFromPost+"'";
+        
+        using var cmd = new MySqlCommand(sql, connection);
+        try
+        {
+            cmd.ExecuteNonQuery();
+            
+            return "Poste supprimer avec sucees!" ;
+        }
+        catch (MySqlException error)
+        {
+            return error.Message;
+        }
+    }
     
 }
