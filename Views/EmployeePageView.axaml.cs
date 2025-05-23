@@ -6,8 +6,8 @@ using Avalonia.Media;
 namespace PayApp.Views;
 using Avalonia.Layout;
 using Avalonia.Controls.ApplicationLifetimes;
-using PayApp.DataModels;
-using PayApp.ViewModels;
+using DataModels;
+using ViewModels;
 
 public partial class EmployeePageView : UserControl
 {
@@ -17,7 +17,7 @@ public partial class EmployeePageView : UserControl
         InitializeComponent();
     }
 
-    public async void RefreshDatagrid()
+    public void RefreshDatagrid()
     {
             if(this.DataContext is EmployeePageViewModel vm)
             {
@@ -54,13 +54,14 @@ public partial class EmployeePageView : UserControl
             }
         };
 
-        await popup.ShowDialog((Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow!);
+        await popup.ShowDialog((Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)?.MainWindow!);
     }
 
 
     public async void AddEmployeePopup_Click(object? sender, RoutedEventArgs e)
     {
         // Création des champs
+        var posteBox = new TextBox { Watermark = "id Poste", Margin = new Thickness(0 ,0 ,0 ,10) };
         var nomBox = new TextBox { Watermark = "Nom", Margin = new Thickness(0, 0, 0, 10) };
         var prenomBox = new TextBox { Watermark = "Prénom", Margin = new Thickness(0, 0, 0, 10) };
         var dateNaissanceBox = new DatePicker { Margin = new Thickness(0, 0, 0, 10) };
@@ -89,6 +90,8 @@ public partial class EmployeePageView : UserControl
                 Margin = new Thickness(20),
                 Children =
                 {
+                    new TextBlock { Text = "ID poste :" },
+                    posteBox,
                     new TextBlock { Text = "Nom :" },
                     nomBox,
                     new TextBlock { Text = "Prénom :" },
@@ -106,8 +109,9 @@ public partial class EmployeePageView : UserControl
             }
         };
     
-        enregistrerButton.Click += async (_, _) =>
+        enregistrerButton.Click += (_, _) =>
         {
+            var idposte = posteBox.Text?.Trim();
             var nom = nomBox.Text?.Trim();
             var prenom = prenomBox.Text?.Trim();
             var dateNaissance = dateNaissanceBox.SelectedDate;
@@ -115,7 +119,7 @@ public partial class EmployeePageView : UserControl
             var email = emailBox.Text?.Trim();
             var tel = telBox.Text?.Trim();
 
-            if (string.IsNullOrWhiteSpace(nom)||string.IsNullOrWhiteSpace(email)||string.IsNullOrWhiteSpace(tel) ||string.IsNullOrWhiteSpace(sexe)|| dateNaissance == null)
+            if (string.IsNullOrWhiteSpace(idposte)||string.IsNullOrWhiteSpace(nom)||string.IsNullOrWhiteSpace(email)||string.IsNullOrWhiteSpace(tel) ||string.IsNullOrWhiteSpace(sexe)|| dateNaissance == null)
             { 
                 ShowMessage("Veuillez remplir tous les champs importants");
                 return;
@@ -123,15 +127,18 @@ public partial class EmployeePageView : UserControl
 
             // Envoie des données à une méthode d'enregistrement
             var model = new EmployeeDataModel();
-            model.InsertEmployee(nom, prenom,sexe, dateNaissance.Value.DateTime,email,tel);
+            if (prenom != null)
+                model.InsertEmployee(nom, prenom, sexe, dateNaissance.Value.DateTime, email, tel, idposte);
 
             popup.Close();
             RefreshDatagrid();
         };
 
         // Affiche le popup
-        await popup.ShowDialog((Application.Current.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
-            ?.MainWindow);
+        var mainWindow = (Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime)
+            ?.MainWindow;
+        if (mainWindow != null)
+            await popup.ShowDialog(mainWindow);
     }
 
     public async void DeleteEmployeePopup_Click(object? sender, RoutedEventArgs e)
@@ -161,7 +168,7 @@ public partial class EmployeePageView : UserControl
 
             }
         };
-        confirmerButton.Click += async (_, _) =>
+        confirmerButton.Click += (_, _) =>
         {
             var id = idBox.Text?.Trim();
        

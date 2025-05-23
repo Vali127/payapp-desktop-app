@@ -41,15 +41,16 @@ public class EmployeeDataModel
 
     }
     //ajouter employe
-    public void InsertEmployee(string nom, string prenom, string sexe, DateTime dateNaissance, string email, string telephone)
+    public void InsertEmployee(string nom, string prenom, string sexe, DateTime dateNaissance, string email, string telephone,string idposte)
     {
         using var connection = new MySqlConnection(_dbConnectionString);
         connection.Open();
-        string query = @"INSERT INTO EMPLOYE(nom_employe, prenom_employe, datenais, email, telephone, sexe) 
-                     VALUES (@nom, @prenom, @datenais, @email, @telephone, @sexe)";
+        string query = @"INSERT INTO EMPLOYE(nom_employe, prenom_employe, datenais, email, telephone, sexe,id_poste) 
+                     VALUES (@nom, @prenom, @datenais, @email, @telephone, @sexe,@idposte)";
 
         using var command = new MySqlCommand(query, connection);
-
+        
+        command.Parameters.AddWithValue("@idposte", idposte);
         command.Parameters.AddWithValue("@nom", nom);
         command.Parameters.AddWithValue("@prenom", prenom);
         command.Parameters.AddWithValue("@datenais", dateNaissance);
@@ -129,7 +130,7 @@ public class EmployeeDataModel
          }
      }
 
-     public void DeleteEmployee(string id)
+     public void DeleteEmployee(string? id)
      {
          using var connection = new MySqlConnection(_dbConnectionString);
          connection.Open();
