@@ -12,6 +12,7 @@ public class Pages
             { "Empty", new EmptyPageViewModel() },
             { "Home", new HomePageViewModel() },
             { "Org", new OrgPageViewModel() },
+            { "Setting", new SettingPageViewModel() }
         };
         
         return pages;
