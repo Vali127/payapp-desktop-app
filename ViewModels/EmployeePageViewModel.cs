@@ -1,14 +1,13 @@
 using System.Collections.ObjectModel;
-using PayApp.Data;
 using PayApp.DataModels;
-
+using PayApp.Data;
 namespace PayApp.ViewModels;
 
 public class EmployeePageViewModel : ViewModelBase
 { 
     
     private EmployeeDataModel _dataModel = new EmployeeDataModel();
-
+    //action pour bouton details
     public ObservableCollection<Employee> Employees{get;set;}
     
     public EmployeePageViewModel()

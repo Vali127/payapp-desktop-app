@@ -5,66 +5,103 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:vm="clr-namespace:PayApp.ViewModels"
              x:DataType="vm:EmployeePageViewModel"
-             x:Class="PayApp.Views.EmployeePageView">
-       <StackPanel>
-        <DataGrid ItemsSource="{Binding Employees}" HorizontalAlignment="Left" IsReadOnly="True" AutoGenerateColumns="False">
-              <DataGrid.Columns>
-                  <DataGridTemplateColumn Header="ID">
-                      <DataGridTemplateColumn.CellTemplate>
-                          <DataTemplate>
-                              <TextBlock Text="{Binding IdEmploye}"/>
-                          </DataTemplate>
-                      </DataGridTemplateColumn.CellTemplate>
-                  </DataGridTemplateColumn>
+             x:Class="PayApp.Views.EmployeePageView"
+             FontFamily="{DynamicResource Nunito}"
+             x:Name="Root"
+            >
+    
+    <StackPanel Margin="20 40 20 20">
+        <TextBlock Margin="0 0 0 20" Text="Listes des employes" TextAlignment="Center" FontFamily="{DynamicResource NunitoBold}"  FontSize="24" FontWeight="Bold" Foreground="{DynamicResource HighlightColor } "/>
+            <Border Background="{DynamicResource SecondaryBackground}" CornerRadius="10" Padding="10" Width="700" Height="500">
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding Employees}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="0" BorderBrush="#444" CornerRadius="8" Margin="5" Padding="10" Background="Transparent">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
 
-                  <DataGridTemplateColumn Header="Nom">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding NomEmploye}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Orientation="Horizontal" Spacing="5">
+                                            <TextBlock Text="{Binding IdEmploye}" FontWeight="Bold" />
+                                            <TextBlock Text="{Binding NomEmploye}"/>
+                                            <TextBlock Text="{Binding PrenomEmploye}" />
+                                            <TextBlock Text="{Binding NomPoste}"></TextBlock>
+                                        </StackPanel>
+
+                                        <Button Grid.Column="1" Content="Détails" Command="{Binding ShowDetailsCommand}"
+                                                 Margin="5,0"/>
+                                        
+                                        <Button Grid.Column="2" Content="Modifier"
+                                               Margin="5,0"/>
+                                    </Grid>
+
+                                    <StackPanel IsVisible="{Binding  IsDetailsVisible}" Grid.Row="1" Margin="10,5,0,0">
+                                       <Grid ColumnDefinitions="*,*">
+                                           <StackPanel Grid.Column="0">
+                                               <StackPanel Orientation="Horizontal">
+                                                   <TextBlock Text="Nom : " FontWeight="Bold"/>
+                                                   <TextBlock Text="{Binding NomEmploye}" />     
+                                               </StackPanel>
+                                              
+                                               <StackPanel Orientation="Horizontal">
+                                                   <TextBlock Text="Prenom(s)" FontWeight="Bold"/>
+                                                   <TextBlock Text="{Binding PrenomEmploye}" />
+                                               </StackPanel>
+                                               
+                                               <StackPanel Orientation="Horizontal">
+                                                   <TextBlock Text="Sexe : " FontWeight="Bold"/>
+                                                   <TextBlock Text="{Binding Sexe}" />
+                                               </StackPanel>
+                                            
+                                               <StackPanel Orientation="Horizontal">
+                                                   <TextBlock Text="Date de naissance : " FontWeight="Bold"/>
+                                                   <TextBlock Text="{Binding DateNaissance}" />
+                                               </StackPanel>
+                                              
+                                               <StackPanel Orientation="Horizontal">
+                                                   <TextBlock Text="Email : " FontWeight="Bold"/>
+                                                   <TextBlock Text="{Binding Email}" />
+                                               </StackPanel>
+                                            
+                                               <StackPanel Orientation="Horizontal">
+                                                   <TextBlock Classes="labelInfo" Text="Téléphone : " FontWeight="Bold"/>
+                                                   <TextBlock Text="{Binding NumTelephone}" />
+                                               </StackPanel>
+                                              
+                                           </StackPanel>
+                                           <StackPanel Grid.Column="1">
+                                               <StackPanel Orientation="Horizontal">
+                                                   <TextBlock Text="Poste : " FontWeight="Bold"/>
+                                                   <TextBlock Text="{Binding NomPoste}" />
+                                               </StackPanel>
+                                            
+                                               <StackPanel Orientation="Horizontal">
+                                                   <TextBlock Text="Departement : " FontWeight="Bold"/>
+                                                   <TextBlock Text="{Binding NomDepartement}" />
+                                               </StackPanel>
+                                               
+
+                                           </StackPanel>
+                                           
+                                       </Grid>
+                                        
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
                         </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Prenom">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding PrenomEmploye}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Sexe">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Sexe}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Naissance">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding DateNaissance}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Email">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Email}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Telephone">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding NumTelephone}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-           <StackPanel Orientation="Horizontal" Spacing="10">
-               <Button Click="AddEmployeePopup_Click" Classes="btnCrud" Background="{DynamicResource HighlightBackgroundColor}" Content="Ajouter"/>
-               <Button Click="ModifyEmployeePopup_Click"  Classes="btnCrud" Content="Modifier"/>
-               <Button Click="DeleteEmployeePopup_Click" Classes="btnCrud" Content="Supprimer" Background="{DynamicResource OrangeBackgroundColor}"/>
-           </StackPanel>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
     </StackPanel>
 </UserControl>

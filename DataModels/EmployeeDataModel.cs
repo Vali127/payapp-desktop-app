@@ -16,7 +16,8 @@ public class EmployeeDataModel
         using var connection = new MySqlConnection(_dbConnectionString);
         connection.Open();
         
-        string query = "SELECT * FROM EMPLOYE";
+        string query ="SELECT E.id_employe, E.nom_employe, E.prenom_employe,  E.datenais,  E.sexe,   E.email, E.telephone, E.id_poste,P.nom_poste,D.nom_departement FROM EMPLOYE E LEFT JOIN POSTE P ON E.id_poste = P.id_poste LEFT JOIN DEPARTEMENT D ON P.id_departement = D.id_departement;";
+        
         using var command = new MySqlCommand(query, connection);
         using var reader = command.ExecuteReader();
         while (reader.Read())
@@ -32,6 +33,9 @@ public class EmployeeDataModel
                 Email = reader["email"].ToString()!,
                 NumTelephone = reader["telephone"].ToString()!,
                 Sexe = reader["sexe"].ToString()!,
+                IdPoste = reader["id_poste"].ToString()!,
+                NomPoste = reader["nom_poste"].ToString()!,
+                NomDepartement = reader["nom_departement"].ToString()!,
             };
             employees.Add(employee);
         }
