@@ -30,6 +30,7 @@
     <ItemGroup>
       <Folder Include="Assets\Fonts\" />
       <Folder Include="Assets\Images\" />
+      <Folder Include="Dialog\DialogViewModel\" />
     </ItemGroup>
 
     <ItemGroup>
