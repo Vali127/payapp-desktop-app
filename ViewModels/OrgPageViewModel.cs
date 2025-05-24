@@ -27,7 +27,7 @@ public partial class OrgPageViewModel : ViewModelBase
     }
     
     
-    private string _currentDepartId = "";
+    [ObservableProperty]private string _currentDepartId = "";
     [ObservableProperty] private ObservableCollection<DepartmentDetails>? _departmentDetails;
     [ObservableProperty] private ObservableCollection<PostOnEachDepartment>? _postOnEachDepartments;
     [RelayCommand]
@@ -35,7 +35,7 @@ public partial class OrgPageViewModel : ViewModelBase
     {
         DepartmentDetails = _dataModel.GetDepartementDetails(id);
         PostOnEachDepartments = _dataModel.GetPostByDepartment(id);
-        _currentDepartId = id;
+        CurrentDepartId = id;
         DetailsShown();
     }
 
@@ -57,9 +57,9 @@ public partial class OrgPageViewModel : ViewModelBase
         if (confirm  == ButtonResult.Yes)
         {
             var response = _dataModel.DeletePost( data["id"] as string );
-            var responseBox = MessageBoxManager.GetMessageBoxStandard("Resultat",response);
+            var responseBox = MessageBoxManager.GetMessageBoxStandard("Resultat","Resultat : "+response);
             await responseBox.ShowAsync();
-            GetDepartementDetails(_currentDepartId);
+            GetDepartementDetails(CurrentDepartId);
         }
     }
 }

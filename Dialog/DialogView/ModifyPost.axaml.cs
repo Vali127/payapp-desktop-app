@@ -11,13 +11,16 @@ public partial class ModifyPost : Window
     {
         InitializeComponent();
     }
+    
     public ModifyPost( Dictionary<string, object?> postInfo) // constructeur personnalisé
     {
         InitializeComponent();
-        DataContext = new ModifyPostViewModel();
+        var vm = new ModifyPostViewModel();
+        DataContext = vm;
         ( DataContext as ModifyPostViewModel )?.PostInfoCommand.Execute(postInfo!);
+        vm.ThisWindow = this;
     }
-
+    
     private void InputElementClose_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         Close();

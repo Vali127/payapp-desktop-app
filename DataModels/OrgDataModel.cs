@@ -7,7 +7,6 @@ namespace PayApp.DataModels;
 
 public class OrgDataModel
 {
-    // ReSharper disable once StringLiteralTypo
     private readonly string? _dbconnectionsetting = Environment.GetEnvironmentVariable("DB_CONNECTION_SETTING"); // Env var is charged from program.cs
 
     public ObservableCollection<Department> GetDepartments()
@@ -66,6 +65,7 @@ public class OrgDataModel
         
         return departmentDetail;
     }
+    
 
     public ObservableCollection<PostOnEachDepartment> GetPostByDepartment(string idFromDepartment)
     {
@@ -122,6 +122,7 @@ public class OrgDataModel
             }
         }
     }
+    
     //_______________________code for post___________________________________
 
     public string DeletePost( string? idFromPost )
@@ -144,6 +145,42 @@ public class OrgDataModel
                 return "Suppression non permis !\nCe poste est toujours occupé";
             }
             return error.Number.ToString();
+        }
+    }
+
+    public string UpdatePost(string? idFromPost, string? newName, string? newDescription)
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+        //getting old value
+        var sql = " SELECT * FROM POSTE WHERE id_poste=@id ";
+        var cmd = new MySqlCommand(sql, connection);
+        cmd.Parameters.AddWithValue("@id", idFromPost);
+        using var reader = cmd.ExecuteReader();
+
+        //setting the new value
+        if (reader.Read())
+        {
+            newName = string.IsNullOrEmpty(newName) ? reader.GetString("nom_poste") : newName;
+            newDescription = string.IsNullOrEmpty(newDescription) ? reader.GetString("description_poste") : newDescription;
+        }
+        reader.Close();
+        
+        var sqlToUpdate = "UPDATE POSTE SET nom_poste = @name, description_poste = @desc WHERE id_poste = @id ;";
+        try
+        {
+
+            using var cmd2 = new MySqlCommand(sqlToUpdate, connection);
+            cmd2.Parameters.AddWithValue("@name", newName);
+            cmd2.Parameters.AddWithValue("@desc", newDescription);
+            cmd2.Parameters.AddWithValue("@id", idFromPost);
+            cmd2.ExecuteNonQuery();
+
+            return "Operation effectué avec succès !!";
+        }
+        catch (MySqlException error )
+        {
+            return error.Message;
         }
     }
 }

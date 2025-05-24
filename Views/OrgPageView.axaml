@@ -14,7 +14,7 @@
                 <Grid Grid.Column="0" HorizontalAlignment="Left" RowDefinitions="Auto,*" >
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="15" >
                         <TextBlock FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="30 20 0 0" Text="Departement" />
-                        <Button CornerRadius="50" Classes="addDepartement" Padding="5" Margin="0 15 0 0" >
+                        <Button CornerRadius="50" Padding="5" Margin="0 15 0 0" >
                             <StackPanel Orientation="Horizontal" Spacing="" >
                                 <Label FontFamily="{DynamicResource Phosphor}" FontSize="25" Content="&#xE3D6;" />
                             </StackPanel>
@@ -82,7 +82,8 @@
                         <Grid Grid.Row="1" HorizontalAlignment="Center" >
                             <StackPanel Width="500" Spacing="5" Orientation="Horizontal" IsVisible="{Binding DetailsIsShown}" >
                                 <TextBlock Text="Les Postes" FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="10 5 0 10" HorizontalAlignment="Left" />
-                                <Button FontFamily="{DynamicResource Phosphor}" CornerRadius="50" Classes="addDepartement" Padding="5" Margin="0 0 0 0" Content="&#xE3D6;" />
+                                <Button FontFamily="{DynamicResource Phosphor}" CornerRadius="50" Padding="5" Margin="0 0 0 0" Content="&#xE3D6;" />
+                                <Button Command="{Binding GetDepartementDetailsCommand}" CommandParameter="{Binding CurrentDepartId}" FontFamily="{DynamicResource Phosphor}" CornerRadius="50" Padding="5" Margin="0 0 0 0" Content="&#xE036;" />
                             </StackPanel>
                         </Grid>
                         

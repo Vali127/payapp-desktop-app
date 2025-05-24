@@ -4,8 +4,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vmd="clr-namespace:PayApp.Dialog.DialogViewModel"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        MaxWidth="350" MaxHeight="350"
-        MinWidth="350" MinHeight="350"
+        MaxWidth="350" MaxHeight="380"
+        MinWidth="350" MinHeight="380"
         x:DataType="vmd:ModifyPostViewModel"
         x:Class="PayApp.Dialog.DialogView.ModifyPost"
         Title="modifyPost">
@@ -17,16 +17,17 @@
                                 <StackPanel Grid.Row="0">
                                         <StackPanel Margin="3">
                                                 <Label Content="Nouveau nom du poste" Classes="formLabel" />
-                                                <TextBox Classes="formTextBox" />
+                                                <TextBox Text="{Binding NewPostName}" Classes="formTextBox" />
                                         </StackPanel>
                                         <StackPanel Margin="3">
                                                 <Label Content="Nouveau nom du poste" Classes="formLabel" />
-                                                <TextBox AcceptsReturn="True" TextWrapping="Wrap" Classes="formDescription" />
+                                                <TextBox Text="{Binding NewPostDescription}" AcceptsReturn="True" TextWrapping="Wrap" Classes="formDescription" />
+                                                <Label Content="consigne : laissez vide si aucune modification !!" FontSize="9" />
                                         </StackPanel>
                                 </StackPanel>
-                                <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right" Margin="20" >
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right" Margin="0 10 0 20" >
                                         <Button PointerPressed="InputElementClose_OnPointerPressed" Content="fermer" Padding="10 5" FontFamily="{DynamicResource NunitoBold}" Background="{DynamicResource SecondaryBackground}" Foreground="{DynamicResource PrimaryTextColor}" />
-                                        <Button Content="Confirmer" Padding="10 5" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource HighlightColor}" />
+                                        <Button Command="{Binding GetNewPostInfoCommand}" Content="Confirmer" Padding="10 5" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource HighlightColor}" />
                                 </StackPanel>
                         </Grid>
                 </StackPanel>
