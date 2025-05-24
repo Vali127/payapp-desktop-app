@@ -45,7 +45,7 @@
                                                     <Label Content="détails" />
                                                 </StackPanel>
                                             </Button>
-                                            <Button  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Background="{DynamicResource OrangeHighlightColorBackground}" Foreground="{DynamicResource OrangeBackgroundColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
+                                            <Button  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
                                             <Button  Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Background="{DynamicResource AlertTransparentColor}" Foreground="{DynamicResource AlertColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 10 20"/>
                                         </StackPanel>
                                        
