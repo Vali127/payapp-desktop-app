@@ -38,11 +38,13 @@
                                             <TextBlock Text="{Binding NomPoste}"></TextBlock>
                                         </StackPanel>
                                         <!-- bouton a changer -->
-                                        <Button Grid.Column="1" Content="Détails" Command="{Binding ShowDetailsCommand}"
-                                                 Margin="5,0"/>
-                                        
-                                        <Button Grid.Column="2" Content="Modifier"
-                                               Margin="5,0"/>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="15" HorizontalAlignment="Right" >
+                                            <Button Content="Détails" Command="{Binding ShowDetailsCommand}"
+                                                    Margin="5,0"/>
+                                            <Button  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Background="{DynamicResource HighlightBackgroundColor}" Foreground="{DynamicResource HighlightColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
+                                            <Button  Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Background="{DynamicResource AlertTransparentColor}" Foreground="{DynamicResource AlertColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 10 20"/>
+                                        </StackPanel>
+                                       
                                     </Grid>
 
                                     <StackPanel IsVisible="{Binding  IsDetailsVisible}" Grid.Row="1" Margin="10,5,0,0">
