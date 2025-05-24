@@ -13,23 +13,23 @@ namespace PayApp.ViewModels;
 public partial class OrgPageViewModel : ViewModelBase
 { 
     private readonly OrgDataModel _dataModel = new OrgDataModel();
-    private string _currentDepartId = "";
-
-    [ObservableProperty] private ObservableCollection<Department> _departments;
-    [ObservableProperty] private ObservableCollection<DepartmentDetails>? _departmentDetails;
-    [ObservableProperty] private ObservableCollection<PostOnEachDepartment>? _postOnEachDepartments;
-    [ObservableProperty] private bool _detailsIsShown ;
-
-    private void DetailsShown()
-    {
-        DetailsIsShown = true;
-    } 
     
+    [ObservableProperty] private ObservableCollection<Department> _departments;
     public OrgPageViewModel()
     {
         Departments = _dataModel.GetDepartments();
     }
     
+    [ObservableProperty] private bool _detailsIsShown ;
+    private void DetailsShown()
+    {
+        DetailsIsShown = true;
+    }
+    
+    
+    private string _currentDepartId = "";
+    [ObservableProperty] private ObservableCollection<DepartmentDetails>? _departmentDetails;
+    [ObservableProperty] private ObservableCollection<PostOnEachDepartment>? _postOnEachDepartments;
     [RelayCommand]
     private void GetDepartementDetails(string id)
     {

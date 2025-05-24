@@ -83,8 +83,22 @@
         <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
     </Style>
     
-    <Style Selector="Button.addDepartement" >
-        
+    <Style Selector="Label.formLabel" >
+        <Setter Property="FontFamily" Value="{DynamicResource NunitoBold}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}" />
+    </Style>
+    <Style Selector="TextBox.formTextBox" >
+        <Setter Property="Width" Value="300" />
+        <Setter Property="Padding" Value="10 5" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryTextColor}" />
+    </Style>
+    <Style Selector="TextBox.formDescription" >
+        <Setter Property="Height" Value="120" />
+        <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="10" />
     </Style>
     
 </Styles>

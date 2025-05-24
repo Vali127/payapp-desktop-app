@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Input;
 using PayApp.ViewModels;
+using ModifyPost = PayApp.Dialog.DialogView.ModifyPost;
 
 namespace PayApp.Views;
 
@@ -27,7 +28,7 @@ public partial class OrgPageView : UserControl
         (DataContext as OrgPageViewModel)?.PayFromPostCommand.Execute(id);
     }
 
-    private void InputElementDelete_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    private void InputElementDeletePost_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var btn = (Button)sender!;
         var id = btn.Tag as string;
@@ -40,5 +41,21 @@ public partial class OrgPageView : UserControl
         };
         
         ( DataContext as OrgPageViewModel )?.ConfirmDeletionPostCommand.Execute(info!);
+    }
+
+    private async void InputElementModifyPost_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var btn = (Button)sender!;
+        var idPostClicked = btn.Tag as string;
+        var name = btn.Name;
+        
+        var info = new Dictionary<string, object?>
+        {
+            ["id"] = idPostClicked,
+            ["name"] = name
+        };
+        var formDialog = new ModifyPost(info);
+        if (this.VisualRoot is Window mainWindow) await formDialog.ShowDialog(mainWindow);
+        
     }
 }
