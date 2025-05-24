@@ -139,8 +139,11 @@ public class OrgDataModel
         }
         catch (MySqlException error)
         {
-            return error.Message;
+            if (error.Number == 1451)
+            {
+                return "Suppression non permis !\nCe poste est toujours occupé";
+            }
+            return error.Number.ToString();
         }
     }
-    
 }
