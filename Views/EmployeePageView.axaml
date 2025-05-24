@@ -32,15 +32,19 @@
                                         </Grid.ColumnDefinitions>
 
                                         <StackPanel Orientation="Horizontal" Spacing="5">
-                                            <TextBlock Text="{Binding IdEmploye}" FontWeight="Bold" />
-                                            <TextBlock Text="{Binding NomEmploye}"/>
-                                            <TextBlock Text="{Binding PrenomEmploye}" />
-                                            <TextBlock Text="{Binding NomPoste}"></TextBlock>
+                                            <TextBlock Classes="labelInfo"  Text="{Binding IdEmploye}" FontWeight="Bold" />
+                                            <TextBlock Classes="labelInfo"  Text="{Binding NomEmploye}"/>
+                                            <TextBlock Classes="labelInfo"  Text="{Binding PrenomEmploye}" />
+                                            <TextBlock Classes="labelInfo"  Text="{Binding NomPoste}"></TextBlock>
                                         </StackPanel>
                                         <!-- bouton a changer -->
                                         <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="15" HorizontalAlignment="Right" >
-                                            <Button Content="Détails" Command="{Binding ShowDetailsCommand}"
-                                                    Margin="5,0"/>
+                                            <Button Classes="cardButton"  Command="{Binding ShowDetailsCommand}">
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <Label FontFamily="{DynamicResource Phosphor}" Padding="2 5 0 0" Content="&#xE2CE;" />
+                                                    <Label Content="détails" />
+                                                </StackPanel>
+                                            </Button>
                                             <Button  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Background="{DynamicResource HighlightBackgroundColor}" Foreground="{DynamicResource HighlightColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
                                             <Button  Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Background="{DynamicResource AlertTransparentColor}" Foreground="{DynamicResource AlertColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 10 20"/>
                                         </StackPanel>
@@ -76,7 +80,7 @@
                                                </StackPanel>
                                             
                                                <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Classes="labelInfo" Text="Téléphone : " FontWeight="Bold"/>
+                                                   <TextBlock Text="Téléphone : " FontWeight="Bold"/>
                                                    <TextBlock Text="{Binding NumTelephone}" />
                                                </StackPanel>
                                               

@@ -12,4 +12,12 @@
       <Setter Property="TextWrapping" Value="Wrap"/>
       <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"></Setter>
   </Style>
+  
+    <Style Selector="Button.cardButton" >
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="2" ></Setter>
+        <Setter Property="FontSize" Value="12" />
+    </Style>
 </Styles>
