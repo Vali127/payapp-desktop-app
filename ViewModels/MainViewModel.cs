@@ -16,7 +16,6 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] 
     [NotifyPropertyChangedFor(nameof(HomePageIsActive))]
     [NotifyPropertyChangedFor(nameof(OrgPageIsActive))]
-    [NotifyPropertyChangedFor(nameof(EmployeePageIsActive))]
     [NotifyPropertyChangedFor(nameof(SettingIsActive))]
     private ViewModelBase _currentPage;
    
@@ -25,7 +24,6 @@ public partial class MainViewModel : ViewModelBase
     
     public bool HomePageIsActive => CurrentPage == _pages["Home"];
     public bool OrgPageIsActive => CurrentPage == _pages["Org"];
-    public bool EmployeePageIsActive => CurrentPage == _pages["Employee"];
     public bool SettingIsActive => CurrentPage == _pages["Setting"];
     
     
@@ -37,7 +35,6 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]  private void ToggleSideMenu() => SideMenuExpanded = !SideMenuExpanded;
     [RelayCommand]  private void GoToHome() => CurrentPage = _pages["Home"];
     [RelayCommand]  private void GoToOrgPage() => CurrentPage = _pages["Org"];
-    [RelayCommand]  private void GoToEmployeePage() => CurrentPage = _pages["Employee"];
     [RelayCommand] private void GoToSetting() => CurrentPage = _pages["Setting"];
     [RelayCommand]  private void EmptyPage() => CurrentPage = _pages["Empty"]; //pour les pages en cours de development
 }

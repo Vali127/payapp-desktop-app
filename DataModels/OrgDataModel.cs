@@ -52,6 +52,7 @@ public class OrgDataModel
         {
             var dept = new DepartmentDetails
             {
+                IdDepartement = idFromDepartment,
                 DepartmentName = reader["nom_departement"] is DBNull ? "" : reader["nom_departement"].ToString(),
                 Description = reader["description_departement"] is DBNull ? "" : reader["description_departement"].ToString(),
                 NumberOfPost = reader["nombre_postes"] is DBNull ? 0 : Convert.ToInt64(reader["nombre_postes"]),
@@ -219,5 +220,29 @@ public class OrgDataModel
             return reader.GetString("id_departement");
         }
         return null;
+    }
+    //_________________for departement______________________________
+    public string DeleteDepartement(string? id)
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+        
+        var sql = "DELETE FROM DEPARTEMENT WHERE id_departement=@id ";
+
+        try
+        {
+            var cmd = new MySqlCommand(sql, connection);
+            cmd.Parameters.AddWithValue("@id", id);
+            
+            cmd.ExecuteNonQuery();
+            return "Suppression éfféctuée !!";
+        }
+        catch (MySqlException error)
+        {
+            if (error.Number == 1451)
+                return "Suppression non autorisé !! \nCe departement contient toujours des postes!!";
+            Console.WriteLine("code de l erreur : "+error.Number+"\nMessage : "+error.Message);
+            return "Une erreur s'est produite !!";
+        }
     }
 }

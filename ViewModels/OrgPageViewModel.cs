@@ -62,4 +62,17 @@ public partial class OrgPageViewModel : ViewModelBase
             GetDepartementDetails(CurrentDepartId);
         }
     }
+
+    [RelayCommand]
+    private async Task ConfirmDeletionDepartment(string id)
+    {
+        var box = MessageBoxManager.GetMessageBoxStandard("confirmation", "Voulez vous supprimmer ce departement?", ButtonEnum.YesNo);
+        ButtonResult confirmed = await box.ShowAsync();
+        if (confirmed == ButtonResult.Yes)
+        {
+            var response = _dataModel.DeleteDepartement(id);
+            var responseBox = MessageBoxManager.GetMessageBoxStandard("Resultat","Resultat : "+response);
+            await responseBox.ShowAsync();
+        }
+    }
 }

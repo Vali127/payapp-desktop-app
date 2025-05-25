@@ -68,4 +68,12 @@ public partial class OrgPageView : UserControl
         var formDialog = new AddPost(idDepart);
         if (this.VisualRoot is Window mainWindow) await formDialog.ShowDialog(mainWindow);
     }
+
+    private void InputElementDeleteDepart_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var btn = (Button)sender!;
+        var idDepart = btn.Tag as string;
+        
+        ( DataContext as OrgPageViewModel)?.ConfirmDeletionDepartmentCommand.Execute(idDepart);
+    }
 }

@@ -11,6 +11,7 @@ public class Department
 
 public class DepartmentDetails
 {
+        public string? IdDepartement { get; set; } = string.Empty ;
         public string? DepartmentName { get; set; } = string.Empty ;
         public string? Description { get; set; } = string.Empty ;
         public long NumberOfPost { get; set; } = 0 ;
