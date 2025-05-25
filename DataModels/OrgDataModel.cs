@@ -183,4 +183,41 @@ public class OrgDataModel
             return error.Message;
         }
     }
+    
+    public string AddNewPost(string? idDepartement, string? name, string? description)
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+
+        var sql = " INSERT INTO POSTE(nom_poste,description_poste,id_departement) VALUES(@name,@description,@id) ";
+        var cmd = new MySqlCommand(sql, connection);
+        try
+        {
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@description", description);
+            cmd.Parameters.AddWithValue("@id", idDepartement);
+            
+            cmd.ExecuteNonQuery();
+            return "Ajout de poste éfféctué !!";
+        }
+        catch (MySqlException e)
+        {
+            return e.Message;
+        }
+    }
+
+    public string? GetDepartementOfPost(string? id)
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+        var sql = "SELECT id_departement FROM POSTE WHERE id_poste=@id ";
+        var cmd = new MySqlCommand(sql, connection);
+        cmd.Parameters.AddWithValue("@id", id);
+        var reader = cmd.ExecuteReader();
+        if (reader.Read())
+        {
+            return reader.GetString("id_departement");
+        }
+        return null;
+    }
 }

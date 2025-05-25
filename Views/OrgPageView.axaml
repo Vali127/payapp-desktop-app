@@ -82,7 +82,7 @@
                         <Grid Grid.Row="1" HorizontalAlignment="Center" >
                             <StackPanel Width="500" Spacing="5" Orientation="Horizontal" IsVisible="{Binding DetailsIsShown}" >
                                 <TextBlock Text="Les Postes" FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="10 5 0 10" HorizontalAlignment="Left" />
-                                <Button FontFamily="{DynamicResource Phosphor}" CornerRadius="50" Padding="5" Margin="0 0 0 0" Content="&#xE3D6;" />
+                                <Button PointerPressed="InputElementAddPopup_OnPointerPressed" Tag="{Binding CurrentDepartId}" FontFamily="{DynamicResource Phosphor}" CornerRadius="50" Padding="5" Margin="0 0 0 0" Content="&#xE3D6;" />
                                 <Button Command="{Binding GetDepartementDetailsCommand}" CommandParameter="{Binding CurrentDepartId}" FontFamily="{DynamicResource Phosphor}" CornerRadius="50" Padding="5" Margin="0 0 0 0" Content="&#xE036;" />
                             </StackPanel>
                         </Grid>

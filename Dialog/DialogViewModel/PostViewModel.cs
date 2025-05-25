@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -9,10 +10,11 @@ using PayApp.DataModels;
 
 namespace PayApp.Dialog.DialogViewModel;
 
-public partial class ModifyPostViewModel : ObservableObject
+public partial class PostViewModel : ObservableObject
 {
     OrgDataModel _dataModel = new OrgDataModel();
     public Window? ThisWindow { get; set; }
+    [ObservableProperty] private string? _currentDepartId;
     [ObservableProperty] private string? _postId;
     [ObservableProperty] private string? _title;
     [RelayCommand]
@@ -21,7 +23,11 @@ public partial class ModifyPostViewModel : ObservableObject
         PostId =  info["id"].ToString();
         Title = info["name"].ToString();
     }
-    
+
+    public void SetCurrentDepartId(string? id)
+    {
+        CurrentDepartId = id;
+    }
     
     [ObservableProperty] private string? _newPostName;
     [ObservableProperty] private string? _newPostDescription;
@@ -36,5 +42,15 @@ public partial class ModifyPostViewModel : ObservableObject
         {
             ThisWindow?.Close();
         }
+    }
+    
+    [ObservableProperty] private string? _postName; //pour l ajout
+    [ObservableProperty] private string? _postDescription; //pour l' ajout
+    [RelayCommand]
+    private async Task AddNewPost()
+    { 
+        var response = _dataModel.AddNewPost(CurrentDepartId, PostName, PostDescription);
+        var box = MessageBoxManager.GetMessageBoxStandard("Resultat", "Resultat : "+response);
+        await box.ShowAsync();
     }
 }

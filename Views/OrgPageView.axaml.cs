@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Input;
+using PayApp.Dialog.DialogView;
 using PayApp.ViewModels;
 using ModifyPost = PayApp.Dialog.DialogView.ModifyPost;
 
@@ -57,5 +58,14 @@ public partial class OrgPageView : UserControl
         var formDialog = new ModifyPost(info);
         if (this.VisualRoot is Window mainWindow) await formDialog.ShowDialog(mainWindow);
         
+    }
+
+    private async void InputElementAddPopup_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var btn = (Button)sender!;
+        var idDepart = btn.Tag as string;
+        
+        var formDialog = new AddPost(idDepart);
+        if (this.VisualRoot is Window mainWindow) await formDialog.ShowDialog(mainWindow);
     }
 }

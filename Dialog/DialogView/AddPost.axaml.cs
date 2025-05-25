@@ -5,24 +5,27 @@ using PayApp.Dialog.DialogViewModel;
 
 namespace PayApp.Dialog.DialogView;
 
-public partial class ModifyPost : Window
+public partial class AddPost : Window
 {
-    public ModifyPost() //constructor du window
+    public AddPost()
     {
         InitializeComponent();
     }
-    
-    public ModifyPost( Dictionary<string, object?> postInfo) // constructeur personnalisé
+    public AddPost(string? departId)
     {
         InitializeComponent();
         var vm = new PostViewModel();
         DataContext = vm;
-        ( DataContext as PostViewModel )?.PostInfoCommand.Execute(postInfo!);
-        vm.ThisWindow = this;
+        vm.SetCurrentDepartId(departId);
     }
-    
+
     private void InputElementClose_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         Close();
+    }
+
+    private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        (DataContext as PostViewModel)?.AddNewPostCommand.Execute(null);
     }
 }
