@@ -91,4 +91,10 @@ public partial class OrgPageView : UserControl
         var formDialog = new ModifyDepartment(info);
         if(this.VisualRoot is Window mainWindow) await formDialog.ShowDialog(mainWindow);
     }
+
+    private async void InputElementAdd_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var formDialog = new AddDepartment();
+        if(this.VisualRoot is Window mainWindow) await formDialog.ShowDialog(mainWindow);
+    }
 }

@@ -14,7 +14,7 @@
                 <Grid Grid.Column="0" HorizontalAlignment="Left" RowDefinitions="Auto,*" >
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="15" >
                         <TextBlock FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="30 20 0 0" Text="Departement" />
-                        <Button CornerRadius="50" Padding="5" Margin="0 20 0 0" >
+                        <Button PointerPressed="InputElementAdd_OnPointerPressed" CornerRadius="50" Padding="5" Margin="0 20 0 0" >
                             <StackPanel Orientation="Horizontal" Spacing="" >
                                 <Label FontFamily="{DynamicResource Phosphor}" FontSize="16" Content="&#xE3D6;" />
                             </StackPanel>
@@ -62,7 +62,7 @@
                     </ContentControl>
                     
                     
-                    <Grid ClipToBounds="True" HorizontalAlignment="Stretch" RowDefinitions="Auto,Auto,*" Margin="40 0" >
+                    <Grid ClipToBounds="True" HorizontalAlignment="Stretch" RowDefinitions="Auto,Auto,*" Margin="10 0" >
                         
                         <Grid Grid.Row="0">
                             <ItemsControl ItemsSource="{Binding DepartmentDetails}">

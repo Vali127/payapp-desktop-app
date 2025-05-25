@@ -22,12 +22,12 @@ public partial class PostViewModel : ObservableObject
         Title = info["name"].ToString();
     }
     [ObservableProperty] private string? _currentDepartId;
-    [ObservableProperty] private string? _departName;
+    [ObservableProperty] private string? _currentDepartName;
     [RelayCommand]
     private void DepartInfo(Dictionary<string, object?> info)
     {
          CurrentDepartId = info["id"] as  string;
-         DepartName = info["name"] as string;
+         CurrentDepartName = info["name"] as string;
     }
 
     public void SetCurrentDepartId(string? id)
@@ -78,4 +78,19 @@ public partial class PostViewModel : ObservableObject
             ThisWindow?.Close();
         }
     }
+    
+    [ObservableProperty] private string? _departName; //pour l ajout
+    [ObservableProperty] private string? _departDescription; //pour l' ajout
+    [RelayCommand]
+    private async Task AddNewDepartment()
+    { 
+        var response = _dataModel.AddNewDepartment(DepartName, DepartDescription);
+        var box = MessageBoxManager.GetMessageBoxStandard("Resultat", "Resultat : "+response);
+        var closeWindow = await box.ShowAsync();
+        if (closeWindow == ButtonResult.Ok)
+        {
+            ThisWindow?.Close();
+        }
+    }
+
 }

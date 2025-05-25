@@ -12,7 +12,7 @@
         <Grid HorizontalAlignment="Stretch" Background="{DynamicResource PrimaryBackground}" >
                 <StackPanel HorizontalAlignment="Center" Margin="20" Spacing="5" >
                         <TextBlock Foreground="{DynamicResource PrimaryTextColor}" Text="modification" FontFamily="{DynamicResource Nunito}" FontSize="15" TextAlignment="Left" HorizontalAlignment="Left" />
-                        <TextBlock Text="{Binding DepartName}" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" FontSize="25" />
+                        <TextBlock Text="{Binding CurrentDepartName}" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" FontSize="25" />
                         <Grid RowDefinitions="Auto, *" >
                                 <StackPanel Grid.Row="0">
                                         <StackPanel Margin="3">

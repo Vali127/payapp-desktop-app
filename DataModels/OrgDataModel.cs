@@ -281,4 +281,25 @@ public class OrgDataModel
             return error.Message;
         }
     }
+    
+    public string AddNewDepartment(string? name, string? description)
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+
+        var sql = " INSERT INTO DEPARTEMENT(nom_departement,description_departement) VALUES(@name,@description) ";
+        var cmd = new MySqlCommand(sql, connection);
+        try
+        {
+            cmd.Parameters.AddWithValue("@name", name);
+            cmd.Parameters.AddWithValue("@description", description);
+            
+            cmd.ExecuteNonQuery();
+            return "Ajout de departement éfféctué !!";
+        }
+        catch (MySqlException e)
+        {
+            return e.Message;
+        }
+    }
 }
