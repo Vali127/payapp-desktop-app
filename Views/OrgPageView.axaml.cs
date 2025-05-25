@@ -76,4 +76,19 @@ public partial class OrgPageView : UserControl
         
         ( DataContext as OrgPageViewModel)?.ConfirmDeletionDepartmentCommand.Execute(idDepart);
     }
+
+    private async void InputElementModify_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        var btn = (Button)sender!;
+        var idDepart = btn.Tag as string;
+        var name = btn.Name;
+
+        var info = new Dictionary<string, object?>
+        {
+            ["id"] = idDepart,
+            ["name"] = name
+        };
+        var formDialog = new ModifyDepartment(info);
+        if(this.VisualRoot is Window mainWindow) await formDialog.ShowDialog(mainWindow);
+    }
 }

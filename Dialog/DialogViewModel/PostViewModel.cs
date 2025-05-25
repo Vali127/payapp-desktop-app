@@ -13,7 +13,6 @@ public partial class PostViewModel : ObservableObject
 {
     OrgDataModel _dataModel = new OrgDataModel();
     public Window? ThisWindow { get; set; }
-    [ObservableProperty] private string? _currentDepartId;
     [ObservableProperty] private string? _postId;
     [ObservableProperty] private string? _title;
     [RelayCommand]
@@ -21,6 +20,14 @@ public partial class PostViewModel : ObservableObject
     {
         PostId =  info["id"].ToString();
         Title = info["name"].ToString();
+    }
+    [ObservableProperty] private string? _currentDepartId;
+    [ObservableProperty] private string? _departName;
+    [RelayCommand]
+    private void DepartInfo(Dictionary<string, object?> info)
+    {
+         CurrentDepartId = info["id"] as  string;
+         DepartName = info["name"] as string;
     }
 
     public void SetCurrentDepartId(string? id)
@@ -52,6 +59,21 @@ public partial class PostViewModel : ObservableObject
         var box = MessageBoxManager.GetMessageBoxStandard("Resultat", "Resultat : "+response);
         var closeWindow = await box.ShowAsync();
         if (closeWindow == ButtonResult.Ok)
+        {
+            ThisWindow?.Close();
+        }
+    }
+    
+    [ObservableProperty] private string? _newDepartName;
+    [ObservableProperty] private string? _newDepartDescription;
+
+    [RelayCommand]
+    private async Task GetNewDepartInfo()
+    {
+        var response = _dataModel.UpdateDepartment(CurrentDepartId, NewDepartName, NewDepartDescription);
+        var box = MessageBoxManager.GetMessageBoxStandard("Resultat", "Resultat : "+response);
+        var reload =  await box.ShowAsync();
+        if (reload == ButtonResult.Ok)
         {
             ThisWindow?.Close();
         }

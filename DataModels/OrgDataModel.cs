@@ -245,4 +245,40 @@ public class OrgDataModel
             return "Une erreur s'est produite !!";
         }
     }
+    
+    public string UpdateDepartment(string? idDepart, string? newName, string? newDescription)
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+        //getting old value
+        var sql = " SELECT * FROM DEPARTEMENT WHERE id_departement=@id ";
+        var cmd = new MySqlCommand(sql, connection);
+        cmd.Parameters.AddWithValue("@id", idDepart);
+        using var reader = cmd.ExecuteReader();
+
+        //setting the new value
+        if (reader.Read())
+        {
+            newName = string.IsNullOrEmpty(newName) ? reader.GetString("nom_departement") : newName;
+            newDescription = string.IsNullOrEmpty(newDescription) ? reader.GetString("description_departement") : newDescription;
+        }
+        reader.Close();
+        
+        var sqlToUpdate = "UPDATE DEPARTEMENT SET nom_departement = @name, description_departement = @desc WHERE id_departement = @id ;";
+        try
+        {
+
+            using var cmd2 = new MySqlCommand(sqlToUpdate, connection);
+            cmd2.Parameters.AddWithValue("@name", newName);
+            cmd2.Parameters.AddWithValue("@desc", newDescription);
+            cmd2.Parameters.AddWithValue("@id", idDepart);
+            cmd2.ExecuteNonQuery();
+
+            return "Operation effectué avec succès !!";
+        }
+        catch (MySqlException error )
+        {
+            return error.Message;
+        }
+    }
 }
