@@ -16,6 +16,7 @@ public partial class ModifyDepartment : Window
         InitializeComponent();
         var vm = new PostViewModel();
         DataContext = vm;
+        vm.ThisWindow = this;
         ( DataContext as  PostViewModel )?.DepartInfoCommand.Execute(info);
     }
 

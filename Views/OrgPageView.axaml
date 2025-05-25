@@ -14,9 +14,14 @@
                 <Grid Grid.Column="0" HorizontalAlignment="Left" RowDefinitions="Auto,*" >
                     <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="15" >
                         <TextBlock FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="30 20 0 0" Text="Departement" />
-                        <Button CornerRadius="50" Padding="5" Margin="0 15 0 0" >
+                        <Button CornerRadius="50" Padding="5" Margin="0 20 0 0" >
                             <StackPanel Orientation="Horizontal" Spacing="" >
-                                <Label FontFamily="{DynamicResource Phosphor}" FontSize="25" Content="&#xE3D6;" />
+                                <Label FontFamily="{DynamicResource Phosphor}" FontSize="16" Content="&#xE3D6;" />
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding RefreshPageCommand }" CornerRadius="50" Padding="5" Margin="0 20 0 0" >
+                            <StackPanel Orientation="Horizontal" Spacing="" >
+                                <Label FontFamily="{DynamicResource Phosphor}" FontSize="16" Content="&#xE036;" />
                             </StackPanel>
                         </Button>
                     </StackPanel>

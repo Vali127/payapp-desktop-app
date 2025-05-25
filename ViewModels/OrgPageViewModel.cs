@@ -75,4 +75,11 @@ public partial class OrgPageViewModel : ViewModelBase
             await responseBox.ShowAsync();
         }
     }
+
+    [RelayCommand]
+    private void RefreshPage()
+    {
+        Departments = _dataModel.GetDepartments();
+        GetDepartementDetails(CurrentDepartId);
+    }
 }
