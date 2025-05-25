@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Avalonia.Controls;
@@ -51,6 +50,10 @@ public partial class PostViewModel : ObservableObject
     { 
         var response = _dataModel.AddNewPost(CurrentDepartId, PostName, PostDescription);
         var box = MessageBoxManager.GetMessageBoxStandard("Resultat", "Resultat : "+response);
-        await box.ShowAsync();
+        var closeWindow = await box.ShowAsync();
+        if (closeWindow == ButtonResult.Ok)
+        {
+            ThisWindow?.Close();
+        }
     }
 }

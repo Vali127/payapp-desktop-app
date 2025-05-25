@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Avalonia.Controls;
 using Avalonia.Input;
 using PayApp.Dialog.DialogViewModel;
@@ -17,6 +16,7 @@ public partial class AddPost : Window
         var vm = new PostViewModel();
         DataContext = vm;
         vm.SetCurrentDepartId(departId);
+        vm.ThisWindow = this;
     }
 
     private void InputElementClose_OnPointerPressed(object? sender, PointerPressedEventArgs e)
