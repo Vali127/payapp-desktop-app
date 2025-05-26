@@ -3,13 +3,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="PayApp.Dialog.DialogView.AddEmploye"
+        x:Class="PayApp.Dialog.DialogView.ModifyEmploye"
         xmlns:vmd="clr-namespace:PayApp.Dialog.DialogViewModel"
-        x:DataType="vmd:AddEmployeViewModel"
-        Title="Ajouter un employe"
+        x:DataType="vmd:ModifyEmployeViewModel"
+        Title="Modifier un employe"
         Width="400" Height="600"
         WindowStartupLocation="CenterOwner">
-   <Grid HorizontalAlignment="Stretch" Background="{DynamicResource PrimaryBackground}">
+        
+        <Grid HorizontalAlignment="Stretch" Background="{DynamicResource PrimaryBackground}">
            <StackPanel HorizontalAlignment="Center" Margin="20" Spacing="5">
                    <Grid RowDefinitions="Auto,*">
                            <StackPanel Grid.Row="0">
@@ -44,7 +45,7 @@
                            </StackPanel>
                            <StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right" Margin="0 10 0 20" >
                                    <Button  PointerPressed="InputElementClose_OnPointerPressed" Content="Annuler" Padding="10 5" FontFamily="{DynamicResource NunitoBold}" Background="{DynamicResource SecondaryBackground}" Foreground="{DynamicResource PrimaryTextColor}" />
-                                   <Button Command="{Binding AddNewEmployeCommand}" Content="Confirmer" Padding="10 5" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource HighlightColor}" />
+                                   <Button Command="{Binding ModifyEmployeCommand}" Content="Confirmer" Padding="10 5" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource HighlightColor}" />
                            </StackPanel>
                            
                    </Grid>

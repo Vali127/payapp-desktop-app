@@ -7,7 +7,6 @@
              x:DataType="vm:EmployeePageViewModel"
              x:Class="PayApp.Views.EmployeePageView"
              FontFamily="{DynamicResource Nunito}"
-             x:Name="Root"
             >
     
     <StackPanel Margin="20 40 20 20">
@@ -46,8 +45,8 @@
                                                     <Label Content="détails" />
                                                 </StackPanel>
                                             </Button>
-                                            <Button  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="15" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
-                                            <Button  Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="15" Background="{DynamicResource AlertTransparentColor}" Foreground="{DynamicResource AlertColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 10 20"/>
+                                            <Button PointerPressed="InputElementModifyEmploye_OnPointerPressed" Tag="{Binding IdEmploye}"  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="15" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
+                                            <Button PointerPressed="InputElementDeleteEmploye_OnPointerPressed" Tag="{Binding IdEmploye}" Name="{Binding NomEmploye}" Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="15" Background="{DynamicResource AlertTransparentColor}" Foreground="{DynamicResource AlertColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 10 20"/>
                                         </StackPanel>
                                        
                                     </Grid>
@@ -108,11 +107,15 @@
                 </ItemsControl>
             </ScrollViewer>
         </Border>
-       <Button Margin="0 15 0 0 " VerticalContentAlignment="Center" HorizontalAlignment="Center" Width="120" Height="40" CornerRadius="8" Background="{DynamicResource HighlightBackgroundColor}" Foreground="{DynamicResource HighlightColor}" FontWeight="DemiBold">
-           <StackPanel Orientation="Horizontal" Spacing="5">
-               <Label Content="+" FontSize="25"/>
-               <Label Content="Nouveau" Margin="0,10,0,2" FontSize="13"/>
-           </StackPanel>
-       </Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+            <Button PointerPressed="InputElementAddNewEmploye_OnPointerPressed" Margin="0 15 10 0 "  Width="120" Height="40" CornerRadius="8" Background="{DynamicResource HighlightBackgroundColor}" Foreground="{DynamicResource HighlightColor}" FontWeight="DemiBold">
+                <StackPanel Orientation="Horizontal" Spacing="15">
+                    <Label Content="+" FontSize="25"/>
+                    <Label Content="Nouveau" Margin="0,10,0,2" FontSize="13"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding ReloadEmployeesCommand}" Padding="15 10 0 0" Margin="0 15 0 0 "  Width="120" Height="40" CornerRadius="8" Background="{DynamicResource HighlightBackgroundColor}" Foreground="{DynamicResource HighlightColor}" FontWeight="DemiBold" Content="Actualiser" PointerPressed="InputRefresh_OnPointerPressed"></Button>
+        </StackPanel>
+      
     </StackPanel>
 </UserControl>

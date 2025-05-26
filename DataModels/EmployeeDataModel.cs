@@ -45,50 +45,53 @@ public class EmployeeDataModel
 
     }
     //ajouter employe
-    public void InsertEmployee(string nom, string prenom, string sexe, DateTime dateNaissance, string email, string telephone)
+    public string InsertEmployee(string idPoste,string nom, string prenom, string sexe,DateTime dateNaissance, string email, string telephone)
     {
         using var connection = new MySqlConnection(_dbConnectionString);
         connection.Open();
-        string query = @"INSERT INTO EMPLOYE(nom_employe, prenom_employe, datenais, email, telephone, sexe) 
-                     VALUES (@nom, @prenom, @datenais, @email, @telephone, @sexe)";
-
-        using var command = new MySqlCommand(query, connection);
-
-        command.Parameters.AddWithValue("@nom", nom);
-        command.Parameters.AddWithValue("@prenom", prenom);
-        command.Parameters.AddWithValue("@datenais", dateNaissance);
-        command.Parameters.AddWithValue("@email", email);
-        command.Parameters.AddWithValue("@telephone", telephone);
-        command.Parameters.AddWithValue("@sexe", sexe);
-
+        string query = @"INSERT INTO EMPLOYE(id_poste,nom_employe, prenom_employe, datenais, email, telephone, sexe) 
+                     VALUES (@idposte,@nom, @prenom, @datenais, @email, @telephone, @sexe)";
+        
         try
         {
+            using var command = new MySqlCommand(query, connection);
+            command.Parameters.AddWithValue("@idposte", idPoste);
+            command.Parameters.AddWithValue("@nom", nom);
+            command.Parameters.AddWithValue("@prenom", prenom);
+            command.Parameters.AddWithValue("@datenais", dateNaissance);
+            command.Parameters.AddWithValue("@email", email);
+            command.Parameters.AddWithValue("@telephone", telephone);
+            command.Parameters.AddWithValue("@sexe", sexe);
             command.ExecuteNonQuery();
+            return "Ajout de nouveau employe  reussi";
         }
-        catch (MySqlException ex)
+        catch (MySqlException e)
         {
-            Console.WriteLine("Erreur MySQL : " + ex.Message);
+            Console.WriteLine("Erreur MySQL : " + e.Message);
+            return "Une erreur s'est produit lors de l'ajout";
         }
         catch (Exception e)
         {
             Console.WriteLine("Erreur générale : " + e.Message);
+            return "Une erreur s'est produite lors de l'ajout";
         }
     }
     //modifier employe
-   public void UpdateEmployee(string id, string nom, string prenom, string sexe, DateTime? dateNaissance, string email, string telephone)
+   public string UpdateEmployee(string? idEmp,string? idpst, string? nom, string? prenom, string? sexe, DateTime? dateNaissance, string? email, string? telephone)
      {
          using var connection = new MySqlConnection(_dbConnectionString);
          connection.Open();
      
-         string query1 = @"SELECT nom_employe, prenom_employe, sexe, datenais, email, telephone 
+         string query1 = @"SELECT id_poste,nom_employe, prenom_employe, sexe, datenais, email, telephone 
                            FROM EMPLOYE WHERE id_employe = @id";
          using var command1 = new MySqlCommand(query1, connection);
-         command1.Parameters.AddWithValue("@id", id);
+         command1.Parameters.AddWithValue("@id", idEmp);
      
          using (var reader = command1.ExecuteReader())
          {
              if (reader.Read())
              {
+                 idpst = string.IsNullOrWhiteSpace(idpst) ? reader["id_poste"].ToString()! : idpst;
                  nom = string.IsNullOrWhiteSpace(nom) ? reader["nom_employe"].ToString()! : nom;
                  prenom = string.IsNullOrWhiteSpace(prenom) ? reader["prenom_employe"].ToString()! : prenom;
                  sexe = string.IsNullOrWhiteSpace(sexe) ? reader["sexe"].ToString()! : sexe;
@@ -101,57 +104,87 @@ public class EmployeeDataModel
          }
      
          string query2 = @"UPDATE EMPLOYE 
-                           SET nom_employe = @nom,
+                           SET id_poste = @idposte,
+                               nom_employe = @nom,
                                prenom_employe = @prenom,
                                sexe = @sexe,
                                datenais = @datenais,
                                email = @email,
                                telephone = @telephone 
-                           WHERE id_employe = @id";
-     
-         using var command2 = new MySqlCommand(query2, connection);
-         command2.Parameters.AddWithValue("@id", id);
-         command2.Parameters.AddWithValue("@nom", nom);
-         command2.Parameters.AddWithValue("@prenom", prenom);
-         command2.Parameters.AddWithValue("@sexe", sexe);
-         command2.Parameters.Add("@datenais", MySqlDbType.Date).Value = dateNaissance;
-         command2.Parameters.AddWithValue("@email", email);
-         command2.Parameters.AddWithValue("@telephone", telephone);
+                           WHERE id_employe = @idEmp";
      
          try
          {
+              using var command2 = new MySqlCommand(query2, connection);
+              
+              command2.Parameters.AddWithValue("@idEmp", idEmp);
+              command2.Parameters.AddWithValue("@idposte", idpst);
+              command2.Parameters.AddWithValue("@nom", nom);
+              command2.Parameters.AddWithValue("@prenom", prenom);
+              command2.Parameters.AddWithValue("@sexe", sexe);
+              command2.Parameters.Add("@datenais", MySqlDbType.Date).Value = dateNaissance;
+              command2.Parameters.AddWithValue("@email", email);
+              command2.Parameters.AddWithValue("@telephone", telephone);
+                      
              command2.ExecuteNonQuery();
-             Console.WriteLine("modif reussi");
+             return("Operation de modification reussie");
          }
-         catch (MySqlException ex)
+         catch (MySqlException sqlError)
          {
-             Console.WriteLine("Erreur MySQL : " + ex.Message);
+             Console.WriteLine("Erreur MySQL : " + sqlError.Message);
+             return("Une Erreur s'est produite lors de la modification");
          }
          catch (Exception e)
          {
              Console.WriteLine("Erreur générale : " + e.Message);
+             return("Une Erreur s'est produite lors de la modification");
          }
      }
 
-     public void DeleteEmployee(string id)
+     public string DeleteEmployee(string id)
      {
          using var connection = new MySqlConnection(_dbConnectionString);
          connection.Open();
          string query = @"delete from EMPLOYE where id_employe = @id";
-         using var command = new MySqlCommand(query, connection);
-         command.Parameters.AddWithValue("@id", id);
+         
          try
          {
+             using var command = new MySqlCommand(query, connection);
+             command.Parameters.AddWithValue("@id", id);
              command.ExecuteNonQuery();
+             return "Suppression reussie";
          }
          catch (MySqlException ex)
          {
              Console.WriteLine("Erreur MySQL : " + ex.Message);
+             return "Une erreur s'est produit lors de la suppression";
          }
          catch (Exception e)
          {
              Console.WriteLine(e);
-             throw;
+             return "Une erreur s'est produit lors de la suppression";
+
          }
+     }
+
+     //id post pour la liste deroulante
+     public ObservableCollection<string> GetIdPost()
+     {
+         var idposts = new ObservableCollection<string>();
+        
+         using var connection = new MySqlConnection(_dbConnectionString);
+         connection.Open();
+
+         string query = "SELECT id_poste FROM POSTE";
+         using var command = new MySqlCommand(query, connection);
+         using var reader = command.ExecuteReader();
+         while (reader.Read())
+         {
+             var id = reader["id_poste"].ToString();
+             if (id != null) idposts.Add(id);
+         }
+
+         return idposts;
+         
      }
 }
