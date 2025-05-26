@@ -1,0 +1,23 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!-- Add Controls for Previewer Here -->
+        </Border>
+    </Design.PreviewWith>
+
+    <!-- Add Styles Here -->
+  <Style Selector="TextBlock.labelInfo">
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"></Setter>
+  </Style>
+  
+    <Style Selector="Button.cardButton" >
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="2" ></Setter>
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+</Styles>

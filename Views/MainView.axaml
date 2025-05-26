@@ -34,7 +34,7 @@
                                                         <Label Content="Organisation" IsVisible="{Binding SideMenuExpanded}"/>
                                                 </StackPanel>
                                         </Button>
-                                        <Button Command="{Binding EmptyPageCommand}" HorizontalAlignment="Stretch" >
+                                        <Button Classes.Active="{Binding EmployeePageIsActive}" Command="{Binding GoToEmployeePageCommand}" HorizontalAlignment="Stretch" >
                                                 <StackPanel Orientation="Horizontal" >
                                                         <Label Classes="icon" Content="&#xE68E;"/>
                                                         <Label Content="Employés" IsVisible="{Binding SideMenuExpanded}" />
