@@ -33,4 +33,36 @@ public class PaymentDataModel
         
         return result;
     }
+
+    public double GetSumOfPayedMoney()
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+
+        var sql = "SELECT SUM(s.salaire_base - s.impot) AS total_salaire_net FROM EMPLOYE e JOIN PAIEMENT p ON e.id_employe = p.id_employe JOIN SALAIRE s ON e.id_poste = s.id_poste WHERE p.etat = 'payé';";
+        
+        var cmd = new MySqlCommand(sql, connection);
+        var reader = cmd.ExecuteReader();
+        if (reader.Read())
+        {
+            return (double)reader["total_salaire_net"];
+        }
+        return 0;
+    }
+    
+    public Int64 GetSumOfPayedEmployee()
+    {
+        var connection = new MySqlConnection(_dbconnectionsetting);
+        connection.Open();
+
+        var sql = "SELECT COUNT(*) AS nb_employe FROM PAIEMENT ";
+        
+        var cmd = new MySqlCommand(sql, connection);
+        var reader = cmd.ExecuteReader();
+        if (reader.Read())
+        {
+            return (long)reader["nb_employe"];
+        }
+        return 0;
+    }
 }

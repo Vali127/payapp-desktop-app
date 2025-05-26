@@ -11,5 +11,6 @@
         <Setter Property="Background" Value="{DynamicResource SecondaryBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource HighlightColor}"/>
         <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SecondaryBackground}" />
     </Style>
 </Styles>
