@@ -36,6 +36,5 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]  private void GoToHome() => CurrentPage = _pages["Home"];
     [RelayCommand]  private void GoToOrgPage() => CurrentPage = _pages["Org"];
     [RelayCommand]  private void GoToEmployeePage() => CurrentPage = _pages["Employee"];
-
     [RelayCommand]  private void EmptyPage() => CurrentPage = _pages["Empty"]; //pour les pages en cours de development
 }

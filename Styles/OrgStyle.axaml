@@ -2,22 +2,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         >
     <Design.PreviewWith>
-        <Border Padding="20" Background="{DynamicResource PrimaryBackground }" >
+        <Border Background="{DynamicResource PrimaryBackground }" >
             <!-- Add Controls for Previewer Here -->
             
-            <Border Classes="cardAddMore">
-                <StackPanel>
-                    <TextBlock Classes="cardTitleAddMore" Text="+"/>
-                    <TextBlock Classes="cardDescriptionAddMore" Text="Vous pouvez ajouter plus de département" />
-                </StackPanel>
-            </Border>
         </Border>
     </Design.PreviewWith>
 
     <!-- Add Styles Here -->
     <Style Selector="Border.card" >
         <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
-        <Setter Property="Width" Value="260" />
+        <Setter Property="Width" Value="320" />
         <Setter Property="CornerRadius" Value="5" ></Setter>
         <Setter Property="Margin" Value="0 0 0 10" ></Setter>
     </Style>
@@ -30,6 +24,7 @@
         <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}" />
         <Setter Property="Margin" Value="10 5 10 10" ></Setter>
         <Setter Property="TextWrapping" Value="Wrap" ></Setter>
+        <Setter Property="TextAlignment" Value="Left" />
     </Style>
     
     <Style Selector="Border.cardAddMore" >
@@ -52,6 +47,58 @@
         <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
         <Setter Property="TextAlignment" Value="Center"></Setter>
         <Setter Property="TextWrapping" Value="Wrap" ></Setter>
+    </Style>
+    
+    <!-- dETAILS BUTTON STYLE -->
+    <Style Selector="Button.cardButton" >
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryTextColor}" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Padding" Value="2" ></Setter>
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+    
+    <!-- scrobar -->
+    <Style Selector="ScrollBar Thumb">
+        <Setter Property="Background" Value="{DynamicResource HighlightBackgroundColor}"/>
+        <Setter Property="Width" Value="10"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+    <Style Selector="ScrollBar Thumb:pointerover">
+        <Setter Property="Background" Value="{DynamicResource HighlightColor}"/>
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+    <Style Selector="ScrollBar Thumb:pressed">
+        <Setter Property="Background" Value="{DynamicResource HighlightColor}"/>
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="CornerRadius" Value="8"/>
+    </Style>
+    
+    <Style Selector="Border.Description" >
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Margin" Value="30 0" />
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="CornerRadius" Value="5" ></Setter>
+        <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
+    </Style>
+    
+    <Style Selector="Label.formLabel" >
+        <Setter Property="FontFamily" Value="{DynamicResource NunitoBold}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}" />
+    </Style>
+    <Style Selector="TextBox.formTextBox" >
+        <Setter Property="Width" Value="300" />
+        <Setter Property="Padding" Value="10 5" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryTextColor}" />
+    </Style>
+    <Style Selector="TextBox.formDescription" >
+        <Setter Property="Height" Value="120" />
+        <Setter Property="Background" Value="{DynamicResource SecondaryBackground}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="10" />
     </Style>
     
 </Styles>
