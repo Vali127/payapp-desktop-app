@@ -13,7 +13,8 @@ public class Pages
             { "Home", new HomePageViewModel() },
             { "Org", new OrgPageViewModel() },
             {"Employee",new EmployeePageViewModel()},
-            { "Payment", new PaymentPageViewModel() }
+            { "Payment", new PaymentPageViewModel() },
+            { "Setting", new SettingPageViewModel() }
         };
         
         return pages;
