@@ -16,6 +16,7 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty] 
     [NotifyPropertyChangedFor(nameof(HomePageIsActive))]
     [NotifyPropertyChangedFor(nameof(OrgPageIsActive))]
+    [NotifyPropertyChangedFor(nameof(PaymentPageIsActive))]
     private ViewModelBase _currentPage;
    
     // Allez dans MainVmLib pour introduire des nouvelles pages
@@ -23,7 +24,7 @@ public partial class MainViewModel : ViewModelBase
     
     public bool HomePageIsActive => CurrentPage == _pages["Home"];
     public bool OrgPageIsActive => CurrentPage == _pages["Org"];
-    
+    public bool PaymentPageIsActive => CurrentPage ==  _pages["Payment"];
     
     public MainViewModel()
     {
@@ -34,4 +35,5 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]  private void GoToHome() => CurrentPage = _pages["Home"];
     [RelayCommand]  private void GoToOrgPage() => CurrentPage = _pages["Org"];
     [RelayCommand]  private void EmptyPage() => CurrentPage = _pages["Empty"]; //pour les pages en cours de development
+    [RelayCommand] private void GoToPaymentPage() => CurrentPage = _pages["Payment"];
 }

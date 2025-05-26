@@ -26,7 +26,7 @@ public class OrgDataModel
             {
                 IdDepartement = reader["id_departement"].ToString()!,
                 NomDepartement = reader["nom_departement"].ToString()!,
-                Description = reader["description"].ToString()!
+                Description = reader["description_departement"].ToString()!
             };
 
             departments.Add(dept);
