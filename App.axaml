@@ -10,6 +10,7 @@
     </Application.DataTemplates>
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="Styles/EmployePageStyle.axaml"></StyleInclude>
         <StyleInclude Source="Styles/AppDefaultStyle.axaml"/>
         <StyleInclude Source="Styles/OrgStyle.axaml"/>
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
