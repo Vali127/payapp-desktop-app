@@ -52,7 +52,6 @@ public partial class ModifyEmployeViewModel:ObservableObject
     [RelayCommand]
     private async Task ModifyEmploye()
     {
-       
         
          if (Email != null && !IsValidEmail(Email))
         {
@@ -68,8 +67,8 @@ public partial class ModifyEmployeViewModel:ObservableObject
 
         else
         {
-
-            var answer = _dataModel.UpdateEmployee(IdEmploye,IdPoste,NomEmploye, PrenomEmploye, Sexe, DateNaissance!.Value.Date, Email, Telephone);
+            var date = DateNaissance.HasValue ? DateNaissance!.Value.Date : (DateTime?)null;
+            var answer = _dataModel.UpdateEmployee(IdEmploye,IdPoste,NomEmploye, PrenomEmploye, Sexe, date, Email, Telephone);
             var box = MessageBoxManager.GetMessageBoxStandard("Operation ajout ", "Resultat : "+answer);
             var reload =  await box.ShowAsync();
           

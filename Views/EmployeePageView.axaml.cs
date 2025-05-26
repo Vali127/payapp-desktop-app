@@ -26,7 +26,10 @@ public partial class EmployeePageView : UserControl
     }
     private async void InputElementModifyEmploye_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        var dialogModify = new ModifyEmploye();
+        
+        var btn = (Button)sender!;
+        var id = btn.Tag as string;
+        var dialogModify = new ModifyEmploye(id);
         if (this.VisualRoot is Window mainWindow) await dialogModify.ShowDialog(mainWindow);
 
         

@@ -38,7 +38,7 @@ public partial class EmployeePageViewModel : ViewModelBase
     }
     public async Task ConfirmDeletionEmploye(Dictionary<string,object> data)
     {
-        var box = MessageBoxManager.GetMessageBoxStandard("Confirmation","Voulez vous supprimer "+data["name"]+"de la liste des employes?", ButtonEnum.YesNo);
+        var box = MessageBoxManager.GetMessageBoxStandard("Confirmation","Voulez vous supprimer "+data["name"]+"  de la liste des employes?", ButtonEnum.YesNo);
         ButtonResult confirm = await box.ShowAsync();
         if (confirm  == ButtonResult.Yes)
         {

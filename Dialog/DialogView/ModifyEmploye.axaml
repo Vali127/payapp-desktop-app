@@ -14,10 +14,10 @@
            <StackPanel HorizontalAlignment="Center" Margin="20" Spacing="5">
                    <Grid RowDefinitions="Auto,*">
                            <StackPanel Grid.Row="0">
-                                   <StackPanel Margin="3">
-                                           <Label Content="Identifiant Poste"/>
-                                           <ComboBox  ItemsSource="{Binding Idposts}" SelectedItem="{Binding IdPoste,Mode=TwoWay}"/>
-                                   </StackPanel>
+                                      <StackPanel Margin="3">
+                                              <Label Content="Identifiant Poste"/>
+                                              <ComboBox  ItemsSource="{Binding Idposts}" SelectedItem="{Binding IdPoste,Mode=TwoWay}"/>
+                                      </StackPanel>
                                    <StackPanel Margin="3">
                                            <Label Content="Nom"/>
                                            <TextBox Text="{Binding NomEmploye ,Mode=TwoWay}"/>
