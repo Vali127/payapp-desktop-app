@@ -40,7 +40,7 @@
                                                         <Label Content="Employés" IsVisible="{Binding SideMenuExpanded}" />
                                                 </StackPanel>
                                         </Button>
-                                        <Button Command="{Binding EmptyPageCommand}" HorizontalAlignment="Stretch">
+                                        <Button Command="{Binding GoToPaymentPageCommand}" Classes.Active="{Binding PaymentPageIsActive}" HorizontalAlignment="Stretch">
                                                 <StackPanel Orientation="Horizontal" >
                                                         <Label Classes="icon" Content="&#xE68A;"/>
                                                         <Label Content="Paiement" IsVisible="{Binding SideMenuExpanded}" />

@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PayApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:PaymentPageViewModel"
+             x:Class="PayApp.Views.PaymentPageView">
+            
+            <Grid ColumnDefinitions="Auto,*" >
+                <StackPanel Grid.Column="0" Margin="40 20">
+                    <TextBlock Text="Employés Payé" Foreground="{DynamicResource HighlightColor}" Margin="40 20 40 20" FontFamily="{DynamicResource NunitoBold}" FontSize="25" />
+                
+                    <DataGrid ItemsSource="{Binding Payments }" IsReadOnly="True" AutoGenerateColumns="False" >
+                        <DataGrid.Columns>
+                        
+                            <DataGridTemplateColumn Header="ID" Width="100" >
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="10 0 0 0" Text="{Binding Id}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        
+                            <DataGridTemplateColumn Header="Nom" Width="300">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="10 0 0 0" Text="{Binding Nom}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        
+                            <DataGridTemplateColumn Header="Poste Occuppé" Width="200">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Padding="10 0 0 0" Text="{Binding NomPoste}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 40 0" >
+                    <TextBlock Text="RESUME" Foreground="{DynamicResource HighlightColor}" Margin="40 40 40 10" FontFamily="{DynamicResource NunitoBold}" FontSize="25"/>
+                    <StackPanel Spacing="3">
+                        <Label Content="total de fonds versé" Foreground="{DynamicResource PrimaryTextColor}" FontSize="11" />
+                        <Label Content="{Binding TotalSalaireNet, StringFormat='{}{0} ar '}" Foreground="{DynamicResource HighlightColor}" Background="{DynamicResource HighlightBackgroundColor}" Padding="8 5" CornerRadius="8" />
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Employee payé" Foreground="{DynamicResource PrimaryTextColor}" FontSize="11" />
+                        <Label Content="{Binding TotalEmployee, StringFormat='{}{0} employés '}" Foreground="{DynamicResource HighlightColor}" Background="{DynamicResource HighlightBackgroundColor}" Padding="8 5" CornerRadius="8" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            
+</UserControl>
