@@ -8,7 +8,7 @@
              x:Class="PayApp.Views.HomePageView">
             <Design.DataContext> <vm:HomePageViewModel/> </Design.DataContext>
     
-    <Grid RowDefinitions="Auto,Auto" Background="{DynamicResource PrimaryBackground}" >
+    <Grid Margin="50 0 0 0" RowDefinitions="Auto,Auto" Background="{DynamicResource PrimaryBackground}" >
                 <Grid Grid.Row="0">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
                         <StackPanel Margin="20 80 20 20" Spacing="20">

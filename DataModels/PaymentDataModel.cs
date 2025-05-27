@@ -12,13 +12,17 @@ public class PaymentDataModel
     public ObservableCollection<Payment> GetPayedEmployee()
     {
         var result = new ObservableCollection<Payment>();
-        var connection = new MySqlConnection(_dbconnectionsetting);
+
+        if (string.IsNullOrEmpty(_dbconnectionsetting))
+            return result;
+
+        using var connection = new MySqlConnection(_dbconnectionsetting);
         connection.Open();
 
-        var sql = "SELECT e.id_employe, e.nom_employe, p.nom_poste FROM PAIEMENT pa JOIN EMPLOYE e ON pa.id_employe = e.id_employe JOIN POSTE p ON e.id_poste = p.id_poste;";
-        
-        var cmd = new MySqlCommand(sql, connection);
-        var reader = cmd.ExecuteReader();
+        var sql = "SELECT e.id_employe, e.nom_employe, p.nom_poste FROM PAIEMENT pa JOIN EMPLOYE e ON pa.id_employe = e.id_employe JOIN POSTE p ON e.id_poste = p.id_poste WHERE pa.etat = 'payé';";
+
+        using var cmd = new MySqlCommand(sql, connection);
+        using var reader = cmd.ExecuteReader();
 
         while (reader.Read())
         {
@@ -30,38 +34,46 @@ public class PaymentDataModel
             };
             result.Add(tmp);
         }
-        
+
         return result;
     }
 
-    public double GetSumOfPayedMoney()
+    public long GetSumOfPayedMoney()
     {
-        var connection = new MySqlConnection(_dbconnectionsetting);
+        if (string.IsNullOrEmpty(_dbconnectionsetting))
+            return 0;
+
+        using var connection = new MySqlConnection(_dbconnectionsetting);
         connection.Open();
 
         var sql = "SELECT SUM(s.salaire_base - s.impot) AS total_salaire_net FROM EMPLOYE e JOIN PAIEMENT p ON e.id_employe = p.id_employe JOIN SALAIRE s ON e.id_poste = s.id_poste WHERE p.etat = 'payé';";
-        
-        var cmd = new MySqlCommand(sql, connection);
-        var reader = cmd.ExecuteReader();
-        if (reader.Read())
+
+        using var cmd = new MySqlCommand(sql, connection);
+        using var reader = cmd.ExecuteReader();
+
+        if (reader.Read() && reader["total_salaire_net"] != DBNull.Value)
         {
-            return (double)reader["total_salaire_net"];
+            return Convert.ToInt64(reader["total_salaire_net"]);
         }
         return 0;
     }
-    
-    public Int64 GetSumOfPayedEmployee()
+
+    public long GetSumOfPayedEmployee()
     {
-        var connection = new MySqlConnection(_dbconnectionsetting);
+        if (string.IsNullOrEmpty(_dbconnectionsetting))
+            return 0;
+
+        using var connection = new MySqlConnection(_dbconnectionsetting);
         connection.Open();
 
-        var sql = "SELECT COUNT(*) AS nb_employe FROM PAIEMENT ";
-        
-        var cmd = new MySqlCommand(sql, connection);
-        var reader = cmd.ExecuteReader();
+        var sql = "SELECT COUNT(*) AS nb_employe FROM PAIEMENT WHERE etat = 'payé';";
+
+        using var cmd = new MySqlCommand(sql, connection);
+        using var reader = cmd.ExecuteReader();
+
         if (reader.Read())
         {
-            return (long)reader["nb_employe"];
+            return Convert.ToInt64(reader["nb_employe"]);
         }
         return 0;
     }

@@ -8,8 +8,6 @@ public class SettingPageDataModel
     
     public static string RestorePayment(string newDate)
     {
-        string result = "";
-
         // Conversion de la string en DateTime
         DateTime dateParsed = DateTime.ParseExact(newDate, "d/M/yyyy", System.Globalization.CultureInfo.InvariantCulture);
         string mysqlDate = dateParsed.ToString("yyyy-MM-dd");

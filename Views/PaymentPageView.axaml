@@ -9,37 +9,25 @@
             
             <Grid ColumnDefinitions="Auto,*" >
                 <StackPanel Grid.Column="0" Margin="40 20">
-                    <TextBlock Text="Employés Payé" Foreground="{DynamicResource HighlightColor}" Margin="40 20 40 20" FontFamily="{DynamicResource NunitoBold}" FontSize="25" />
-                
-                    <DataGrid ItemsSource="{Binding Payments }" IsReadOnly="True" AutoGenerateColumns="False" >
-                        <DataGrid.Columns>
-                        
-                            <DataGridTemplateColumn Header="ID" Width="100" >
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Padding="10 0 0 0" Text="{Binding Id}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        
-                            <DataGridTemplateColumn Header="Nom" Width="300">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Padding="10 0 0 0" Text="{Binding Nom}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        
-                            <DataGridTemplateColumn Header="Poste Occuppé" Width="200">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Padding="10 0 0 0" Text="{Binding NomPoste}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel Orientation="Horizontal" Spacing="5" >
+                        <TextBlock Text="Employés Payé" Foreground="{DynamicResource HighlightColor}" Margin="40 20 40 20" FontFamily="{DynamicResource NunitoBold}" FontSize="25" />
+                        <Button Command="{Binding RefreshListCommand}"  FontFamily="{DynamicResource Phosphor}" Content="&#xE036;" Padding="5" Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource SecondaryBackground}" CornerRadius="8"  />
+                    </StackPanel>
+                    <ScrollViewer Height="700" >
+                        <ItemsControl Grid.Row="0" ItemsSource="{Binding Payments}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{DynamicResource SecondaryBackground}" CornerRadius="5" Margin="0,5" Padding="10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Id}" Width="150" Foreground="{DynamicResource PrimaryTextColor}" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Nom}" Width="300" Foreground="{DynamicResource PrimaryTextColor}" VerticalAlignment="Center"/>
+                                            <TextBlock FontFamily="{DynamicResource NunitoBold}" Text="{Binding NomPoste}" Width="250" Foreground="{DynamicResource PrimaryTextColor}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </StackPanel>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 40 0" >
                     <TextBlock Text="RESUME" Foreground="{DynamicResource HighlightColor}" Margin="40 40 40 10" FontFamily="{DynamicResource NunitoBold}" FontSize="25"/>

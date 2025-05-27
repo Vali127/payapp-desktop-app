@@ -6,18 +6,18 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PayApp.Views.SettingPageView"
              x:DataType="vm:SettingPageViewModel">
-            <UserControl.DataContext>
-                <vm:SettingPageViewModel/>
-            </UserControl.DataContext>
+    <UserControl.DataContext>
+        <vm:SettingPageViewModel/>
+    </UserControl.DataContext>
             
     
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <StackPanel Spacing="15">
-                    <Label Content="Date mensuelle de paiement" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" />
-                    <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
-                    <Button Tag="{Binding SelectedDate}" PointerPressed="InputElement_OnPointerPressed" Background="{DynamicResource HighlightColor}" Foreground="{DynamicResource SecondaryBackground}" Content="Sauvegarder?" />
-                </StackPanel>
-            </Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" >
+        <StackPanel Spacing="15">
+            <Label Content="Date mensuelle de paiement" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" />
+            <DatePicker SelectedDate="{Binding SelectedDate, Mode=TwoWay}" />
+            <Button Tag="{Binding SelectedDate}" PointerPressed="InputElement_OnPointerPressed" Background="{DynamicResource HighlightColor}" Foreground="{DynamicResource SecondaryBackground}" Content="Sauvegarder?" />
+        </StackPanel>
+    </Grid>
             
 
 </UserControl>

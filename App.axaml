@@ -18,8 +18,8 @@
     </Application.Styles>
              
     <Application.Resources>
-        <SolidColorBrush x:Key="PrimaryBackground" Color="#323443" />
-        <SolidColorBrush x:Key="SecondaryBackground" Color="#272830" />
+        <SolidColorBrush x:Key="PrimaryBackground" Color="#1D202E" />
+        <SolidColorBrush x:Key="SecondaryBackground" Color="#151724" />
         <SolidColorBrush x:Key="PrimaryTextColor" Color="#FFFFFF" />
         <SolidColorBrush x:Key="DisabledTextColor" Color="#B0B0B0" ></SolidColorBrush>
         <SolidColorBrush x:Key="SecondaryTextColor" Color="#272830" />

@@ -10,7 +10,7 @@ public partial class ModifyEmploye : Window
     {
         InitializeComponent();
     }
-    public ModifyEmploye(string idEmp)
+    public ModifyEmploye(string? idEmp)
     {
         InitializeComponent();
         var vm = new ModifyEmployeViewModel();

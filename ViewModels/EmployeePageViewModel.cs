@@ -17,7 +17,7 @@ public partial class EmployeePageViewModel : ViewModelBase
     private EmployeeDataModel _dataModel = new();
     //action pour bouton details
     [ObservableProperty]
-    private ObservableCollection<Employee> _employees=new();
+    private ObservableCollection<Employee> _employees = new();
     public EmployeePageViewModel()
     {
         Employees = _dataModel.GetEmployees();
@@ -47,5 +47,13 @@ public partial class EmployeePageViewModel : ViewModelBase
             await responseBox.ShowAsync();
             LoadEmployees();
         }
+    }
+
+    [ObservableProperty] private string? _searchedKewWord;
+
+    [RelayCommand]
+    private void GetSearchedEmployee()
+    {
+        Employees = _dataModel.GetSearchedEmployees(SearchedKewWord);
     }
 }
