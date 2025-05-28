@@ -18,6 +18,8 @@ public partial class EmployeePageView : UserControl
         DataContext=new EmployeePageViewModel();
     }
 
+  
+
     private async void InputElementAddNewEmploye_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         var dialogAdd = new AddEmploye();
