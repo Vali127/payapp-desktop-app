@@ -12,100 +12,111 @@
     <StackPanel Margin="20 40 20 20">
         <TextBlock Margin="0 0 0 20" Text="Listes des employes" TextAlignment="Center" FontFamily="{DynamicResource NunitoBold}"  FontSize="24" FontWeight="Bold" Foreground="{DynamicResource HighlightColor } "/>
             <Border Background="{DynamicResource SecondaryBackground}" CornerRadius="10" Padding="10" Width="700" Height="500">
-            <ScrollViewer>
-                <ItemsControl ItemsSource="{Binding Employees}" >
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderThickness="0" BorderBrush="#444" CornerRadius="8" Margin="5" Padding="10" Background="Transparent">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
+                       <Grid RowDefinitions="Auto,*">
+                            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Orientation="Horizontal" Margin=" 0 10 ">
+                                <ComboBox Width="100" PlaceholderText="nom" ItemsSource="{Binding Columns}" SelectedItem="{Binding Column,Mode=TwoWay}">
+                                </ComboBox>
+                                <TextBox Width="120"  Watermark="chaine a rechercher" Text="{Binding Pattern}"/>
+                                <Button Command="{Binding SearchCommand}" Content="&#xE30C;" FontFamily="{DynamicResource PhosphorFill}"  FontSize="20" Foreground="{DynamicResource HighlightColor}" CornerRadius="5" Background="{DynamicResource HighlightBackgroundColor}"/>
 
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <StackPanel Orientation="Horizontal" Spacing="5">
-                                            <TextBlock Classes="labelInfo"  Text="{Binding IdEmploye}" FontWeight="Bold" />
-                                            <TextBlock Classes="labelInfo"  Text="{Binding NomEmploye}"/>
-                                            <TextBlock Classes="labelInfo"  Text="{Binding PrenomEmploye}" />
-                                            <TextBlock Classes="labelInfo"  Text=" , Poste :"/>
-                                            <TextBlock Classes="labelInfo"  Text="{Binding NomPoste}"></TextBlock>
-                                        </StackPanel>
-                                        <!-- bouton a changer -->
-                                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="15" HorizontalAlignment="Right" >
-                                            <Button Margin="0 0 10 20" Classes="cardButton"  Command="{Binding ShowDetailsCommand}">
-                                                <StackPanel Orientation="Horizontal" >
-                                                    <Label FontFamily="{DynamicResource Phosphor}" Padding="2 5 0 0" Content="&#xE2CE;" />
-                                                    <Label Content="détails" />
+                                <Button Command="{Binding AlldisplayCommand}" Content="tout afficher"/>
+                            </StackPanel>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding Employees}" >
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderThickness="0" BorderBrush="#444" CornerRadius="8" Margin="5" Padding="10" Background="Transparent">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+    
+                                                <StackPanel Orientation="Horizontal" Spacing="5">
+                                                    <TextBlock Classes="labelInfo"  Text="{Binding IdEmploye}" FontWeight="Bold" />
+                                                    <TextBlock Classes="labelInfo"  Text="{Binding NomEmploye}"/>
+                                                    <TextBlock Classes="labelInfo"  Text="{Binding PrenomEmploye}" />
+                                                    <TextBlock Classes="labelInfo"  Text=" , Poste :"/>
+                                                    <TextBlock Classes="labelInfo"  Text="{Binding NomPoste}"></TextBlock>
                                                 </StackPanel>
-                                            </Button>
-                                            <Button PointerPressed="InputElementModifyEmploye_OnPointerPressed" Tag="{Binding IdEmploye}"  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="15" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
-                                            <Button PointerPressed="InputElementDeleteEmploye_OnPointerPressed" Tag="{Binding IdEmploye}" Name="{Binding NomEmploye}" Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="15" Background="{DynamicResource AlertTransparentColor}" Foreground="{DynamicResource AlertColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 10 20"/>
-                                        </StackPanel>
-                                       
-                                    </Grid>
-
-                                    <StackPanel IsVisible="{Binding  IsDetailsVisible}" Grid.Row="1" Margin="10,5,0,0">
-                                       <Grid ColumnDefinitions="*,*">
-                                           <StackPanel Grid.Column="0">
-                                               <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Text="Nom : " FontWeight="Bold"/>
-                                                   <TextBlock Text="{Binding NomEmploye}" />     
-                                               </StackPanel>
-                                              
-                                               <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Text="Prenom(s)" FontWeight="Bold"/>
-                                                   <TextBlock Text="{Binding PrenomEmploye}" />
-                                               </StackPanel>
+                                                <!-- bouton a changer -->
+                                                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="15" HorizontalAlignment="Right" >
+                                                    <Button Margin="0 0 10 20" Classes="cardButton"  Command="{Binding ShowDetailsCommand}">
+                                                        <StackPanel Orientation="Horizontal" >
+                                                            <Label FontFamily="{DynamicResource Phosphor}" Padding="2 5 0 0" Content="&#xE2CE;" />
+                                                            <Label Content="détails" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                    <Button PointerPressed="InputElementModifyEmploye_OnPointerPressed" Tag="{Binding IdEmploye}"  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="15" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
+                                                    <Button PointerPressed="InputElementDeleteEmploye_OnPointerPressed" Tag="{Binding IdEmploye}" Name="{Binding NomEmploye}" Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="15" Background="{DynamicResource AlertTransparentColor}" Foreground="{DynamicResource AlertColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 10 20"/>
+                                                </StackPanel>
                                                
-                                               <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Text="Sexe : " FontWeight="Bold"/>
-                                                   <TextBlock Text="{Binding Sexe}" />
-                                               </StackPanel>
-                                            
-                                               <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Text="Date de naissance : " FontWeight="Bold"/>
-                                                   <TextBlock Text="{Binding DateNaissance}" />
-                                               </StackPanel>
-                                              
-                                               <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Text="Email : " FontWeight="Bold"/>
-                                                   <TextBlock Text="{Binding Email}" />
-                                               </StackPanel>
-                                            
-                                               <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Text="Téléphone : " FontWeight="Bold"/>
-                                                   <TextBlock Text="{Binding NumTelephone}" />
-                                               </StackPanel>
-                                              
-                                           </StackPanel>
-                                           <StackPanel Grid.Column="1">
-                                               <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Text="Poste : " FontWeight="Bold"/>
-                                                   <TextBlock Text="{Binding NomPoste}" />
-                                               </StackPanel>
-                                            
-                                               <StackPanel Orientation="Horizontal">
-                                                   <TextBlock Text="Departement : " FontWeight="Bold"/>
-                                                   <TextBlock Text="{Binding NomDepartement}" />
-                                               </StackPanel>
-                                           </StackPanel>
-                                           
-                                       </Grid>
-                                        
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+                                            </Grid>
+    
+                                            <StackPanel IsVisible="{Binding  IsDetailsVisible}" Grid.Row="1" Margin="10,5,0,0">
+                                               <Grid ColumnDefinitions="*,*">
+                                                   <StackPanel Grid.Column="0">
+                                                       <StackPanel Orientation="Horizontal">
+                                                           <TextBlock Text="Nom : " FontWeight="Bold"/>
+                                                           <TextBlock Text="{Binding NomEmploye}" />     
+                                                       </StackPanel>
+                                                      
+                                                       <StackPanel Orientation="Horizontal">
+                                                           <TextBlock Text="Prenom(s)" FontWeight="Bold"/>
+                                                           <TextBlock Text="{Binding PrenomEmploye}" />
+                                                       </StackPanel>
+                                                       
+                                                       <StackPanel Orientation="Horizontal">
+                                                           <TextBlock Text="Sexe : " FontWeight="Bold"/>
+                                                           <TextBlock Text="{Binding Sexe}" />
+                                                       </StackPanel>
+                                                    
+                                                       <StackPanel Orientation="Horizontal">
+                                                           <TextBlock Text="Date de naissance : " FontWeight="Bold"/>
+                                                           <TextBlock Text="{Binding DateNaissance}" />
+                                                       </StackPanel>
+                                                      
+                                                       <StackPanel Orientation="Horizontal">
+                                                           <TextBlock Text="Email : " FontWeight="Bold"/>
+                                                           <TextBlock Text="{Binding Email}" />
+                                                       </StackPanel>
+                                                    
+                                                       <StackPanel Orientation="Horizontal">
+                                                           <TextBlock Text="Téléphone : " FontWeight="Bold"/>
+                                                           <TextBlock Text="{Binding NumTelephone}" />
+                                                       </StackPanel>
+                                                      
+                                                   </StackPanel>
+                                                   <StackPanel Grid.Column="1">
+                                                       <StackPanel Orientation="Horizontal">
+                                                           <TextBlock Text="Poste : " FontWeight="Bold"/>
+                                                           <TextBlock Text="{Binding NomPoste}" />
+                                                       </StackPanel>
+                                                    
+                                                       <StackPanel Orientation="Horizontal">
+                                                           <TextBlock Text="Departement : " FontWeight="Bold"/>
+                                                           <TextBlock Text="{Binding NomDepartement}" />
+                                                       </StackPanel>
+                                                   </StackPanel>
+                                                   
+                                               </Grid>
+                                                
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+               </Grid>
         </Border>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
             <Button PointerPressed="InputElementAddNewEmploye_OnPointerPressed" Margin="0 15 10 0 "  Width="120" Height="40" CornerRadius="8" Background="{DynamicResource HighlightBackgroundColor}" Foreground="{DynamicResource HighlightColor}" FontWeight="DemiBold">

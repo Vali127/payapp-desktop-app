@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using MySql.Data.MySqlClient;
 using PayApp.Data;
 
@@ -39,11 +41,13 @@ public class EmployeeDataModel
             };
             employees.Add(employee);
         }
-
         return employees;
 
 
     }
+    
+     
+    
     //ajouter employe
     public string InsertEmployee(string idPoste,string nom, string prenom, string sexe,DateTime dateNaissance, string email, string telephone)
     {
@@ -141,7 +145,7 @@ public class EmployeeDataModel
          }
      }
 
-     public string DeleteEmployee(string id)
+     public string DeleteEmployee(string? id)
      {
          using var connection = new MySqlConnection(_dbConnectionString);
          connection.Open();
@@ -186,5 +190,117 @@ public class EmployeeDataModel
 
          return idposts;
          
+     }
+    
+     //recherche selon le pattern et la propriete sur laquelle poster les recherches
+     public ObservableCollection<Employee> GetEmployeeSearch(string column,string pattern)
+     {
+         Console.WriteLine(column);
+
+         var employees = new ObservableCollection<Employee>();
+         var conn = new MySqlConnection(_dbConnectionString);
+         conn.Open();
+         
+         var columns1 = new [] {"nom","prenom","sexe"};
+
+         var columnMap = new Dictionary<string, string>()
+         {
+             { "nom", "nom_employe" },
+             {"prenom","prenom_employe" },
+             {"sexe","sexe"}
+         };
+         if (columns1.Contains(column))
+         {
+             Console.WriteLine("dans la requete pattern is :"+pattern);
+             var query =$"SELECT E.id_employe, E.nom_employe, E.prenom_employe,  E.datenais,  E.sexe,   E.email, E.telephone, E.id_poste,P.nom_poste,D.nom_departement FROM EMPLOYE E LEFT JOIN POSTE P ON E.id_poste = P.id_poste LEFT JOIN DEPARTEMENT D ON P.id_departement = D.id_departement where  E.{columnMap[column]} like @pattern;";
+
+             var command = new MySqlCommand(query, conn);
+             command.Parameters.AddWithValue("@pattern",$"%{pattern}%");
+             var reader = command.ExecuteReader();
+
+             while (reader.Read())
+             {
+                 var emp = new Employee()
+                 {
+                     IdEmploye = reader["id_employe"].ToString()!,
+                     NomEmploye = reader["nom_employe"].ToString()!,
+                     PrenomEmploye = reader["prenom_employe"].ToString()!,
+                     DateNaissance = reader["datenais"] is DBNull 
+                         ? "N/A" 
+                         : Convert.ToDateTime(reader["datenais"]).ToString("MM/dd/yyyy"),
+                     Email = reader["email"].ToString()!,
+                     NumTelephone = reader["telephone"].ToString()!,
+                     Sexe = reader["sexe"].ToString()!,
+                     IdPoste = reader["id_poste"].ToString()!,
+                     NomPoste = reader["nom_poste"].ToString()!,
+                     NomDepartement = reader["nom_departement"].ToString()!
+
+                 };
+                 employees.Add(emp);
+                 
+             }
+         }
+         else if(column=="poste")
+         {
+             string query =$"SELECT E.id_employe, E.nom_employe, E.prenom_employe,  E.datenais,  E.sexe,   E.email, E.telephone, E.id_poste,P.nom_poste,D.nom_departement FROM EMPLOYE E LEFT JOIN POSTE P ON E.id_poste = P.id_poste LEFT JOIN DEPARTEMENT D ON P.id_departement = D.id_departement where P.nom_poste like @pattern;";
+
+             var command =new MySqlCommand(query,conn);
+             command.Parameters.AddWithValue("@pattern",$"%{pattern}%");
+             
+             var reader = command.ExecuteReader();
+
+             while (reader.Read())
+             {
+                 var emp = new Employee()
+                 {
+                     IdEmploye = reader["id_employe"].ToString()!,
+                     NomEmploye = reader["nom_employe"].ToString()!,
+                     PrenomEmploye = reader["prenom_employe"].ToString()!,
+                     DateNaissance = reader["datenais"] is DBNull 
+                         ? "N/A" 
+                         : Convert.ToDateTime(reader["datenais"]).ToString("MM/dd/yyyy"),
+                     Email = reader["email"].ToString()!,
+                     NumTelephone = reader["telephone"].ToString()!,
+                     Sexe = reader["sexe"].ToString()!,
+                     IdPoste = reader["id_poste"].ToString()!,
+                     NomPoste = reader["nom_poste"].ToString()!,
+                     NomDepartement = reader["nom_departement"].ToString()!,
+                 };
+                 employees.Add(emp);
+                 
+             }
+            
+         }
+         else if (column == "departement")
+         { 
+             string query =$"SELECT E.id_employe, E.nom_employe, E.prenom_employe,  E.datenais,  E.sexe,   E.email, E.telephone, E.id_poste,P.nom_poste,D.nom_departement FROM EMPLOYE E LEFT JOIN POSTE P ON E.id_poste = P.id_poste LEFT JOIN DEPARTEMENT D ON P.id_departement = D.id_departement where D.nom_departement like @pattern;";
+
+             var command =new MySqlCommand(query,conn);
+             command.Parameters.AddWithValue("@pattern",$"%{pattern}%");
+             
+             var reader = command.ExecuteReader();
+
+             while (reader.Read())
+             {
+                 var emp = new Employee()
+                 {
+                     IdEmploye = reader["id_employe"].ToString()!,
+                     NomEmploye = reader["nom_employe"].ToString()!,
+                     PrenomEmploye = reader["prenom_employe"].ToString()!,
+                     DateNaissance = reader["datenais"] is DBNull 
+                         ? "N/A" 
+                         : Convert.ToDateTime(reader["datenais"]).ToString("MM/dd/yyyy"),
+                     Email = reader["email"].ToString()!,
+                     NumTelephone = reader["telephone"].ToString()!,
+                     Sexe = reader["sexe"].ToString()!,
+                     IdPoste = reader["id_poste"].ToString()!,
+                     NomPoste = reader["nom_poste"].ToString()!,
+                     NomDepartement = reader["nom_departement"].ToString()!,
+                 };
+                 employees.Add(emp);
+                 
+             }   
+         }
+         return employees;
      }
 }
