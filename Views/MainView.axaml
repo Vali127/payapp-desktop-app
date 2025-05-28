@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="1024" d:DesignHeight="600"
         Width="1024" Height="600"
-        MinWidth="800" MinHeight="500"
+        MinWidth="1200" MinHeight="700"
         FontFamily="{DynamicResource Nunito}"
         x:Class="PayApp.Views.MainView"
         xmlns:vm="clr-namespace:PayApp.ViewModels"
@@ -40,7 +40,7 @@
                                                         <Label Content="Employés" IsVisible="{Binding SideMenuExpanded}" />
                                                 </StackPanel>
                                         </Button>
-                                        <Button Command="{Binding EmptyPageCommand}" HorizontalAlignment="Stretch">
+                                        <Button Command="{Binding GoToPaymentPageCommand}" Classes.Active="{Binding PaymentPageIsActive}" HorizontalAlignment="Stretch">
                                                 <StackPanel Orientation="Horizontal" >
                                                         <Label Classes="icon" Content="&#xE68A;"/>
                                                         <Label Content="Paiement" IsVisible="{Binding SideMenuExpanded}" />
@@ -50,7 +50,7 @@
                                 <Button Grid.Row="1" Classes="toggler" PointerPressed="InputElement_OnPointerPressed" >
                                         <Label Content="{Binding ToggleIcon}" ></Label>
                                 </Button>
-                                <Button Command="{Binding EmptyPageCommand}" Grid.Row="2" Classes="gear" >
+                                <Button Command="{Binding GoToSettingCommand}" Grid.Row="2" Classes="gear" >
                                         <Label Classes="icon" Content="&#xE270;" ></Label> 
                                 </Button>
                         </Grid>

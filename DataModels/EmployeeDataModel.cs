@@ -42,8 +42,6 @@ public class EmployeeDataModel
             employees.Add(employee);
         }
         return employees;
-
-
     }
     
      
@@ -189,7 +187,39 @@ public class EmployeeDataModel
          }
 
          return idposts;
+     }
+
+     public ObservableCollection<Employee> GetSearchedEmployees(string? keyWordSearched)
+     {
+         var employees = new ObservableCollection<Employee>();
+         var connection = new MySqlConnection(_dbConnectionString);
+         connection.Open();
          
+         string query = "SELECT E.id_employe, E.nom_employe, E.prenom_employe, E.datenais, E.sexe, E.email, E.telephone, E.id_poste, P.nom_poste, D.nom_departement FROM EMPLOYE E LEFT JOIN POSTE P ON E.id_poste = P.id_poste LEFT JOIN DEPARTEMENT D ON P.id_departement = D.id_departement WHERE E.nom_employe LIKE @word;";
+         using var command = new MySqlCommand(query, connection);
+         command.Parameters.AddWithValue("@word", $"%{keyWordSearched}%");
+         using var reader = command.ExecuteReader();
+         while (reader.Read())
+         {
+             var employee = new Employee
+             {
+                 IdEmploye = reader["id_employe"].ToString()!,
+                 NomEmploye = reader["nom_employe"].ToString()!,
+                 PrenomEmploye = reader["prenom_employe"].ToString()!,
+                 DateNaissance = reader["datenais"] is DBNull 
+                     ? "N/A" 
+                     : Convert.ToDateTime(reader["datenais"]).ToString("MM/dd/yyyy"),
+                 Email = reader["email"].ToString()!,
+                 NumTelephone = reader["telephone"].ToString()!,
+                 Sexe = reader["sexe"].ToString()!,
+                 IdPoste = reader["id_poste"].ToString()!,
+                 NomPoste = reader["nom_poste"].ToString()!,
+                 NomDepartement = reader["nom_departement"].ToString()!,
+             };
+             employees.Add(employee);
+         }
+
+         return employees;
      }
     
      //recherche selon le pattern et la propriete sur laquelle poster les recherches

@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PayApp.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:PaymentPageViewModel"
+             x:Class="PayApp.Views.PaymentPageView">
+            
+            <Grid ColumnDefinitions="Auto,*" >
+                <StackPanel Grid.Column="0" Margin="40 20">
+                    <StackPanel Orientation="Horizontal" Spacing="5" >
+                        <TextBlock Text="Employés Payé" Foreground="{DynamicResource HighlightColor}" Margin="40 20 40 20" FontFamily="{DynamicResource NunitoBold}" FontSize="25" />
+                        <Button Command="{Binding RefreshListCommand}"  FontFamily="{DynamicResource Phosphor}" Content="&#xE036;" Padding="5" Foreground="{DynamicResource PrimaryTextColor}" Background="{DynamicResource SecondaryBackground}" CornerRadius="8"  />
+                    </StackPanel>
+                    <ScrollViewer Height="700" >
+                        <ItemsControl Grid.Row="0" ItemsSource="{Binding Payments}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{DynamicResource SecondaryBackground}" CornerRadius="5" Margin="0,5" Padding="10">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Id}" Width="150" Foreground="{DynamicResource PrimaryTextColor}" VerticalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Nom}" Width="300" Foreground="{DynamicResource PrimaryTextColor}" VerticalAlignment="Center"/>
+                                            <TextBlock FontFamily="{DynamicResource NunitoBold}" Text="{Binding NomPoste}" Width="250" Foreground="{DynamicResource PrimaryTextColor}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </StackPanel>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 40 0" >
+                    <TextBlock Text="RESUME" Foreground="{DynamicResource HighlightColor}" Margin="40 40 40 10" FontFamily="{DynamicResource NunitoBold}" FontSize="25"/>
+                    <StackPanel Spacing="3">
+                        <Label Content="total de fonds versé" Foreground="{DynamicResource PrimaryTextColor}" FontSize="11" />
+                        <Label Content="{Binding TotalSalaireNet, StringFormat='{}{0} ar '}" Foreground="{DynamicResource HighlightColor}" Background="{DynamicResource HighlightBackgroundColor}" Padding="8 5" CornerRadius="8" />
+                    </StackPanel>
+                    <StackPanel>
+                        <Label Content="Employee payé" Foreground="{DynamicResource PrimaryTextColor}" FontSize="11" />
+                        <Label Content="{Binding TotalEmployee, StringFormat='{}{0} employés '}" Foreground="{DynamicResource HighlightColor}" Background="{DynamicResource HighlightBackgroundColor}" Padding="8 5" CornerRadius="8" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            
+</UserControl>

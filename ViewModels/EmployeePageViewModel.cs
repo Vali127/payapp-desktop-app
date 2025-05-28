@@ -33,7 +33,6 @@ public partial class EmployeePageViewModel : ViewModelBase
     
     public ICommand SearchCommand { get; }
     public ICommand AlldisplayCommand { get; }
-
     public EmployeePageViewModel()
     {
         Employees = _dataModel.GetEmployees();
@@ -87,5 +86,13 @@ public void LoadEmployeesSearch()
             await responseBox.ShowAsync();
             LoadEmployees();
         }
+    }
+
+    [ObservableProperty] private string? _searchedKewWord;
+
+    [RelayCommand]
+    private void GetSearchedEmployee()
+    {
+        Employees = _dataModel.GetSearchedEmployees(SearchedKewWord);
     }
 }

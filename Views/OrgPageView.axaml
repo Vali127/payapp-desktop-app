@@ -3,15 +3,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:PayApp.ViewModels"
-             xmlns:view="clr-namespace:PayApp.Views"
+             xmlns:component="clr-namespace:PayApp.Views.OrgPageComponents"
              x:DataType="vm:OrgPageViewModel"
+             x:Name="Root"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PayApp.Views.OrgPageView">
             <Design.DataContext> <vm:OrgPageViewModel/> </Design.DataContext>
     
             <Grid HorizontalAlignment="Stretch" ColumnDefinitions="Auto, *">
                 <Grid Grid.Column="0" HorizontalAlignment="Left" RowDefinitions="Auto,*" >
-                    <TextBlock Grid.Row="0" FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="30 20 0 0" Text="Departement" />
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="15" >
+                        <TextBlock FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="30 20 0 0" Text="Departement" />
+                        <Button PointerPressed="InputElementAdd_OnPointerPressed" CornerRadius="50" Padding="5" Margin="0 20 0 0" >
+                            <StackPanel Orientation="Horizontal" Spacing="" >
+                                <Label FontFamily="{DynamicResource Phosphor}" FontSize="16" Content="&#xE3D6;" />
+                            </StackPanel>
+                        </Button>
+                        <Button Command="{Binding RefreshPageCommand }" CornerRadius="50" Padding="5" Margin="0 20 0 0" >
+                            <StackPanel Orientation="Horizontal" Spacing="" >
+                                <Label FontFamily="{DynamicResource Phosphor}" FontSize="16" Content="&#xE036;" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                     <ScrollViewer Grid.Row="1">
                         <StackPanel>
                             <ItemsControl ItemsSource="{Binding Departments}" Padding="30 20 30 20" >
@@ -21,6 +34,14 @@
                                             <StackPanel>
                                                 <TextBlock Classes="cardTitle" Text="{Binding NomDepartement}"/>
                                                 <TextBlock Classes="cardDescription" Text="{Binding Description}" />
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10" >
+                                                    <Button PointerPressed="InputElement_OnPointerPressed" Tag="{Binding IdDepartement}" Classes="cardButton">
+                                                        <StackPanel Orientation="Horizontal" >
+                                                            <Label FontFamily="{DynamicResource Phosphor}" Padding="2 5 0 0" Content="&#xE2CE;" />
+                                                            <Label Content="détails" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                </StackPanel>
                                             </StackPanel>
                                         </Border>
                                     </DataTemplate>
@@ -36,9 +57,78 @@
                     </ScrollViewer>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <ContentControl HorizontalAlignment="Center" >
-                        <view:EmptyPageView/>
+                    <ContentControl HorizontalAlignment="Center" IsVisible="{Binding !DetailsIsShown}" >
+                        <component:NoSelectedDepartment/>
                     </ContentControl>
+                    
+                    
+                    <Grid ClipToBounds="True" HorizontalAlignment="Stretch" RowDefinitions="Auto,Auto,*" Margin="10 0" >
+                        
+                        <Grid Grid.Row="0">
+                            <ItemsControl ItemsSource="{Binding DepartmentDetails}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="10 60 0 10" >
+                                            <Border Grid.Row="0" Classes="Description" Width="500" >
+                                                <StackPanel Spacing="15" >
+                                                    <TextBlock Text="{Binding DepartmentName}" Classes="cardTitle" FontSize="20" />
+                                                    <TextBlock Text="{Binding Description}" Classes="cardDescription" />
+                                                    <StackPanel Orientation="Horizontal" Spacing="5">
+                                                        <Label HorizontalAlignment="Left" CornerRadius="12" Padding="10 5" Margin="10 0 10 10" Content="{Binding NumberOfPost, StringFormat='{}{0} poste(s) '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
+                                                        <Label HorizontalAlignment="Left" CornerRadius="12" Padding="10 5" Margin="10 0 10 10" Content="{Binding NumberOfEmployees, StringFormat='{}{0} employé(s) '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
+                                                        <Label HorizontalAlignment="Left" CornerRadius="12" Padding="10 5" Margin="10 0 10 10" Content="{Binding Salary, StringFormat='{}{0} ar '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
+                                                        <Button PointerPressed="InputElementModify_OnPointerPressed" Tag="{Binding IdDepartement}" Name="{Binding DepartmentName}" Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="14" Background="{DynamicResource SecondaryBackground}" Foreground="{DynamicResource PrimaryTextColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 7" Margin="0 0 0 5"/>
+                                                        <Button PointerPressed="InputElementDeleteDepart_OnPointerPressed" Tag="{Binding IdDepartement}" Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="14" Background="{DynamicResource SecondaryBackground}" Foreground="{DynamicResource PrimaryTextColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 7" Margin="0 0 0 5" />
+                                                    </StackPanel>
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                        
+                        <Grid Grid.Row="1" HorizontalAlignment="Stretch" >
+                            <StackPanel Width="500" Spacing="5" Orientation="Horizontal" IsVisible="{Binding DetailsIsShown}" >
+                                <TextBlock Text="Les Postes" FontSize="24" FontFamily="{DynamicResource NunitoBold}" Foreground="{DynamicResource HighlightColor}" Margin="10 5 0 10" HorizontalAlignment="Left" />
+                                <Button PointerPressed="InputElementAddPopup_OnPointerPressed" Tag="{Binding CurrentDepartId}" FontFamily="{DynamicResource Phosphor}" CornerRadius="50" Padding="5" Margin="0 0 0 0" Content="&#xE3D6;" />
+                                <Button Command="{Binding GetDepartementDetailsCommand}" CommandParameter="{Binding CurrentDepartId}" FontFamily="{DynamicResource Phosphor}" CornerRadius="50" Padding="5" Margin="0 0 0 0" Content="&#xE036;" />
+                            </StackPanel>
+                        </Grid>
+                        
+                        <ScrollViewer Grid.Row="2" >
+                                <Grid  RowDefinitions="Auto,Auto"  >
+                                    <ItemsControl Grid.Row="0" ItemsSource="{Binding PostOnEachDepartments}" >
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border CornerRadius="8" Margin="10 0 0 5" Background="{DynamicResource SecondaryBackground}" Width="500" >
+                                                    <StackPanel>
+                                                        <TextBlock Margin="20 20 0 0" Classes="cardTitle" Text="{Binding NomPoste}" />
+                                                        <TextBlock Margin="20 0 0 5" Classes="cardDescription" FontSize="11" Text="{Binding DescriptionPoste}" />
+                                                        <StackPanel Margin="10 0 0 0" Orientation="Horizontal" Spacing="5" >
+                                                            <Label FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" CornerRadius="8" Padding="8 5" Margin="10 0 10 10" Content="{Binding NumberOfEmployees, StringFormat='{}{0} employé(s) '}" Foreground="{DynamicResource HighlightColor}" Background="{DynamicResource HighlightBackgroundColor}" />
+                                                            <Label FontSize="10" FontWeight="Bold" HorizontalAlignment="Left" CornerRadius="8" Padding="8 5" Margin="10 0 10 10" Content="{Binding Salary, StringFormat='{}{0} ar '}" Foreground="{DynamicResource OrangeHighlightColor}" Background="{DynamicResource OrangeHighlightColorBackground}" />
+                                                        </StackPanel>
+                                                        <StackPanel Orientation="Horizontal" Spacing="15" HorizontalAlignment="Right" >
+                                                            <Button PointerPressed="InputElementModifyPost_OnPointerPressed" Tag="{Binding IdPoste}" Name="{Binding NomPoste}"  Content="&#xE3AA;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Background="{DynamicResource HighlightBackgroundColor}" Foreground="{DynamicResource HighlightColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 0 20"/>
+                                                            <Button PointerPressed="InputElementDeletePost_OnPointerPressed" Name="{Binding NomPoste}"  Tag="{Binding IdPoste}"  Content="&#xE4A6;" FontFamily="{DynamicResource PhosphorFill}" FontSize="18" Background="{DynamicResource AlertTransparentColor}" Foreground="{DynamicResource AlertColor}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="0 0 10 20"/>
+                                                            <Button PointerPressed="InputElementPay_OnPointerPressed" Tag="{Binding IdPoste}" Content="Payer?" FontFamily="{DynamicResource NunitoBold}" FontSize="11" Background="{DynamicResource HighlightColor}" Foreground="{DynamicResource SecondaryBackground}" CornerRadius="5" HorizontalAlignment="Right" Padding="10 5" Margin="15 0 20 20"/>
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <Border Grid.Row="1" IsVisible="{Binding DetailsIsShown}" CornerRadius="8" Margin="10 10 0 20" Background="{DynamicResource PrimaryBackground}" Width="500" >
+                                        <StackPanel>
+                                            <TextBlock Foreground="{DynamicResource DisabledTextColor}" TextAlignment="Center" FontFamily="{DynamicResource NunitoBold}" FontSize="20" Text='+' />
+                                            <TextBlock Foreground="{DynamicResource DisabledTextColor}" Classes="cardDescription" Text="vous pouvez ajouter plus de poste" TextAlignment="Center" />
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                        </ScrollViewer>
+                        
+                    </Grid>
                 </Grid>
             </Grid>
 </UserControl>

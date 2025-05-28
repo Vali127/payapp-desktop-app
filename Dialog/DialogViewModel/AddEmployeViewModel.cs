@@ -8,7 +8,6 @@ using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using PayApp.DataModels;
 using System.Text.RegularExpressions;
-using PayApp.ViewModels;
 
 namespace PayApp.Dialog.DialogViewModel;
 
@@ -100,7 +99,7 @@ public partial class AddEmployeViewModel:ObservableObject
     private bool IsValidAge(DateTimeOffset? dateNaissance)
     {
         var today = DateTime.Today;
-        var age = today.Year - dateNaissance.Value.Date.Year;
+        var age = today.Year - dateNaissance!.Value.Date.Year;
         if (dateNaissance.Value.Date > today.AddYears(-age)) age--;
 
         if (age < 18)

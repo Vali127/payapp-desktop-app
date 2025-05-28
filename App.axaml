@@ -13,12 +13,13 @@
         <StyleInclude Source="Styles/EmployePageStyle.axaml"></StyleInclude>
         <StyleInclude Source="Styles/AppDefaultStyle.axaml"/>
         <StyleInclude Source="Styles/OrgStyle.axaml"/>
+        <StyleInclude Source="Styles/PaymentStyle.axaml"/>
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
     </Application.Styles>
              
     <Application.Resources>
-        <SolidColorBrush x:Key="PrimaryBackground" Color="#323443" />
-        <SolidColorBrush x:Key="SecondaryBackground" Color="#272830" />
+        <SolidColorBrush x:Key="PrimaryBackground" Color="#1D202E" />
+        <SolidColorBrush x:Key="SecondaryBackground" Color="#151724" />
         <SolidColorBrush x:Key="PrimaryTextColor" Color="#FFFFFF" />
         <SolidColorBrush x:Key="DisabledTextColor" Color="#B0B0B0" ></SolidColorBrush>
         <SolidColorBrush x:Key="SecondaryTextColor" Color="#272830" />
@@ -30,7 +31,8 @@
         <SolidColorBrush x:Key="SecondaryHighlightBackgroundColor" Color="#2FAE00" Opacity="0.20" />
         <SolidColorBrush x:Key="SecondaryHighlightColor" Color="#2FAE00" />
         <SolidColorBrush x:Key="OrangeHighlightColor" Color="#ffa500"/>
-        <SolidColorBrush x:Key="OrangeHighlightColorBackground" Color="#ffa500" Opacity="0.20"/>        <SolidColorBrush x:Key="AlertColor" Color="#DC0C3A" />
+        <SolidColorBrush x:Key="OrangeHighlightColorBackground" Color="#ffa500" Opacity="0.20"/>
+        <SolidColorBrush x:Key="AlertColor" Color="#DC0C3A" />
         <SolidColorBrush x:Key="AlertTransparentColor" Color="#DC0C3A" Opacity="0.10" />
         
         

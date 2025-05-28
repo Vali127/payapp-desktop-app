@@ -1,27 +1,31 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using PayApp.Dialog.DialogViewModel;
+
 namespace PayApp.Dialog.DialogView;
 
-public partial class ModifyEmploye : Window
+public partial class AddPost : Window
 {
-    public ModifyEmploye()
+    public AddPost()
     {
         InitializeComponent();
     }
-    public ModifyEmploye(string? idEmp)
+    public AddPost(string? departId)
     {
         InitializeComponent();
-        var vm = new ModifyEmployeViewModel();
+        var vm = new PostViewModel();
         DataContext = vm;
-        (DataContext as ModifyEmployeViewModel)?.EmployeIdGetCommand.Execute(idEmp);
+        vm.SetCurrentDepartId(departId);
         vm.ThisWindow = this;
-        
     }
 
     private void InputElementClose_OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
         Close();
+    }
+
+    private void InputElement_OnPointerPressed(object? sender, PointerPressedEventArgs e)
+    {
+        (DataContext as PostViewModel)?.AddNewPostCommand.Execute(null);
     }
 }
