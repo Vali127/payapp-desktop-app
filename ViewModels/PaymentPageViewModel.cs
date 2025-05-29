@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PayApp.Data;
 using PayApp.DataModels;
+using PayApp.Services;
 
 namespace PayApp.ViewModels;
 
@@ -26,5 +27,11 @@ public partial class PaymentPageViewModel : ViewModelBase
         Payments = _paymentDataModel.GetPayedEmployee();
         TotalSalaireNet = _paymentDataModel.GetSumOfPayedMoney();
         TotalEmployee = _paymentDataModel.GetSumOfPayedEmployee();
+    }
+
+    [RelayCommand]
+    private void GeneratePdf(string id)
+    {
+        PdfGenerator.GeneratePdf(id);
     }
 }
