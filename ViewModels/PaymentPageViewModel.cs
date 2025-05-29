@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MsBox.Avalonia;
 using PayApp.Data;
 using PayApp.DataModels;
 using PayApp.Services;
@@ -30,8 +32,10 @@ public partial class PaymentPageViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void GeneratePdf(string id)
+    private async Task GeneratePdf(string id)
     {
         PdfGenerator.GeneratePdf(id);
+        var box = MessageBoxManager.GetMessageBoxStandard("Resultat", "facturation effectuée !!");
+        await box.ShowAsync();
     }
 }
