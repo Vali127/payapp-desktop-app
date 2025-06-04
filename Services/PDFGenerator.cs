@@ -33,7 +33,7 @@ public class PdfGenerator
 
                 page.Content().Column(col =>
                 {
-                    col.Item().PaddingBottom(10).AlignCenter().Text("ACCUSÉ DE RÉCEPTION").SemiBold().FontSize(14).Underline();
+                    col.Item().PaddingBottom(10).AlignCenter().Text("FICHE DE PAIE").SemiBold().FontSize(14).Underline();
 
                     col.Item().Row(row =>
                     {
