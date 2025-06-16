@@ -1,5 +1,5 @@
 # Welcome to PayApp
-Hello, this project is a **school project under development** that we were assigned for our 2nd year here as CS students.
+Hello, this project is a **school project ~~under development~~** that we were assigned for our 2nd year here as CS students.
 
 it is developped with **C#** and the frameWork **Avalonia UI** -*which is very good btw*- . The app aims to **manage salary payment for employees**.
 
