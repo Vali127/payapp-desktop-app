@@ -19,7 +19,7 @@ Developped with **C#** and **Avalonia UI** frameWork -*which is very good btw*- 
    dotnet build
    ```
 5. Developp..
-4.Make a pull request
+4. Make a pull request
 
 ---
 **Note :** This project requires the suitable database of the project.
